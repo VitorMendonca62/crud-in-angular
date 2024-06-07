@@ -1,5 +1,23 @@
 {
-  "students": [],
-  "teachers": [],
+  "students": [
+    {
+      "id": "a3ebd275-7142-4eea-b020-21699a02bfd2",
+      "number": "111111",
+      "name": "awdawdawdawdaw",
+      "email": "sla123@gmail.com",
+      "role": "student",
+      "password": "$2a$10$rnF/CRN6XQ4UhgakGkUdW.p/srf718h0rdBwopX9slmaQh0CmdosS"
+    }
+  ],
+  "teachers": [
+    {
+      "id": "703494df-8377-486b-adf7-c26488f15bdf",
+      "number": "222222",
+      "name": "awdawdawdawdaw",
+      "email": "sla1232@gmail.com",
+      "role": "teacher",
+      "password": "$2a$10$vptBZC9ILpdgXDyUQu6NheHzHkVFRv4sNuJ0mLXjEXiQgrAwFmQEC"
+    }
+  ],
   "admins": []
 }

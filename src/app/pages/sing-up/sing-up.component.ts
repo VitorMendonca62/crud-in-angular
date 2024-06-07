@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
 import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
 import {
   FormControl,
@@ -11,6 +15,9 @@ import { CommonModule } from '@angular/common';
 import { GlobalEventService } from '../../services/eventEmit.service';
 import { SingUpService } from './sing-up.service';
 import { HttpClient } from '@angular/common/http';
+import { ICreateUser } from './sing-up';
+import { IUser } from '../../../models/user.model';
+import { takeFormGroup } from '../../../utils/singup';
 
 @Component({
   selector: 'app-singup',
@@ -28,10 +35,15 @@ import { HttpClient } from '@angular/common/http';
   ],
 })
 export class SingUpComponent {
+  isInDatabase: boolean = false;
+  messageAlert: string =
+    'Já existe um usuário com esses dados. Tente novamente';
+
   // Inputs
   constructor(
     private globalEventService: GlobalEventService,
-    private singUpService: SingUpService
+    private singUpService: SingUpService,
+    private cd: ChangeDetectorRef
   ) {}
 
   inputNumber: IPropsInput = {
@@ -73,30 +85,7 @@ export class SingUpComponent {
   public singup!: FormGroup;
 
   defineFormGroupSingUp(): void {
-    this.singup = new FormGroup(
-      {
-        number: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(6),
-        ]),
-        name: new FormControl('', [
-          Validators.required,
-          Validators.minLength(4),
-        ]),
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(8),
-        ]),
-        confirmPassword: new FormControl('', [
-          Validators.required,
-          Validators.minLength(8),
-        ]),
-        role: new FormControl('student', [Validators.required]),
-      },
-      { validators: MustMatchPassword() }
-    );
+    this.singup = takeFormGroup();
   }
 
   ngOnInit(): void {
@@ -104,15 +93,58 @@ export class SingUpComponent {
   }
 
   isSubmit = false;
-  userSingUp(): void {
+
+  verifyIsInDatabase(email: string, number: string, user: IUser) {
+    if (user.email === email || user.number === number) {
+      this.isInDatabase = true;
+      if (user.email === email) {
+        this.messageAlert =
+          'Já existe um usuário com esse email. Tente novamente';
+      }
+      if (user.number === number) {
+        this.messageAlert =
+          'Já existe um usuário com essa matrícula. Tente novamente';
+      }
+    }
+  }
+
+  showAlert() {
+    document.querySelector('[role=alert]')?.classList.remove('hide');
+    document.querySelector('[role=alert]')?.classList.add('show');
+    this.isInDatabase = false;
+  }
+
+  userSingUp(): undefined {
     this.isSubmit = true;
 
     if (!this.singup.valid) {
       this.globalEventService.emitEvent({ singup: this.singup });
-    } else {
-      // this.singUpService
-      //   .createUser(this.singup.value)
-      //   .subscribe((user) => console.log(user));
+      return;
     }
+    const { email, number } = this.singup.value as ICreateUser;
+
+    if (this.isInDatabase) {
+      this.isInDatabase = false;
+      return;
+    }
+
+    this.singUpService.foundAllUsers().subscribe((response: Response[]) => {
+      response.forEach((listRole: any) => {
+        listRole.forEach((user: IUser) =>
+          this.verifyIsInDatabase(email, number, user)
+        );
+      });
+
+      if (this.isInDatabase) {
+        this.showAlert();
+        return;
+      } else {
+        this.singUpService
+          .createUser(this.singup.value as ICreateUser)
+          .subscribe((isValid) => isValid);
+        this.isInDatabase = false;
+      }
+      this.cd.detectChanges();
+    });
   }
 }
