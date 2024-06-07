@@ -1,0 +1,12 @@
+<div class="mb-3 ">
+  <label class="form-label" for="{{ props?.title }}-{{ props?.type }}">{{ props?.title }}</label>
+  <input
+    type="{{ props?.type }}"
+    name="{{ props?.nameInput }}"
+    placeholder="{{ props?.placeholder }}"
+    id="{{ props?.title }}-{{ props?.type }}"
+    class="form-control"
+  />
+  <span id="{{ props?.nameInput }}"></span>
+  <input type="hidden" className="border-red" />
+</div>

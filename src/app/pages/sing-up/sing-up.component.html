@@ -1,0 +1,20 @@
+<form class="bg-light px-5 py-3">
+  <h2>Cadastro</h2>
+  <app-input-forms [props]="inputName"></app-input-forms>
+  <app-input-forms [props]="inputEmail"></app-input-forms>
+  <app-input-forms [props]="inputPassword"></app-input-forms>
+  <app-input-forms [props]="inputConfirmPassword"></app-input-forms>
+
+  <select
+    class="form-select form-select-sm w-16"
+    aria-label=".form-select-sm example"
+  >
+    <option selected>Open this select menu</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+  </select>
+
+  <app-button [props]="buttonSubmit"></app-button>
+
+</form>
