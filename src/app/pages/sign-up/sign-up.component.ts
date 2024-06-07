@@ -4,27 +4,21 @@ import {
   Component,
 } from '@angular/core';
 import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { MustMatchPassword } from '../../../utils/user';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GlobalEventService } from '../../services/eventEmit.service';
-import { SingUpService } from './sing-up.service';
-import { HttpClient } from '@angular/common/http';
-import { ICreateUser } from './sing-up';
+import { SignUpService } from './sign-up.service';
+import { ICreateUser } from './sign-up';
 import { IUser } from '../../../models/user.model';
-import { takeFormGroup } from '../../../utils/singup';
+import { takeFormGroupSignUp } from '../../../utils/sign';
+import { UsersService } from '../../services/users.service';
 
 @Component({
-  selector: 'app-singup',
+  selector: 'app-signup',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, InputFormsComponent, ReactiveFormsModule],
-  templateUrl: './sing-up.component.html',
+  templateUrl: './sign-up.component.html',
 
   styles: [
     `
@@ -34,7 +28,7 @@ import { takeFormGroup } from '../../../utils/singup';
     `,
   ],
 })
-export class SingUpComponent {
+export class SignUpComponent {
   isInDatabase: boolean = false;
   messageAlert: string =
     'Já existe um usuário com esses dados. Tente novamente';
@@ -42,7 +36,8 @@ export class SingUpComponent {
   // Inputs
   constructor(
     private globalEventService: GlobalEventService,
-    private singUpService: SingUpService,
+    private signUpService: SignUpService,
+    private usersService: UsersService,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -82,14 +77,14 @@ export class SingUpComponent {
   };
 
   // Inputs Validation
-  public singup!: FormGroup;
+  public signup!: FormGroup;
 
-  defineFormGroupSingUp(): void {
-    this.singup = takeFormGroup();
+  defineFormGroupSignUp(): void {
+    this.signup = takeFormGroupSignUp();
   }
 
   ngOnInit(): void {
-    this.defineFormGroupSingUp();
+    this.defineFormGroupSignUp();
   }
 
   isSubmit = false;
@@ -114,21 +109,16 @@ export class SingUpComponent {
     this.isInDatabase = false;
   }
 
-  userSingUp(): undefined {
+  userSignUp(): undefined {
     this.isSubmit = true;
 
-    if (!this.singup.valid) {
-      this.globalEventService.emitEvent({ singup: this.singup });
+    if (!this.signup.valid) {
+      this.globalEventService.emitEvent({ formGroup: this.signup });
       return;
     }
-    const { email, number } = this.singup.value as ICreateUser;
+    const { email, number } = this.signup.value as ICreateUser;
 
-    if (this.isInDatabase) {
-      this.isInDatabase = false;
-      return;
-    }
-
-    this.singUpService.foundAllUsers().subscribe((response: Response[]) => {
+    this.usersService.foundAllUsers().subscribe((response: Response[]) => {
       response.forEach((listRole: any) => {
         listRole.forEach((user: IUser) =>
           this.verifyIsInDatabase(email, number, user)
@@ -139,8 +129,8 @@ export class SingUpComponent {
         this.showAlert();
         return;
       } else {
-        this.singUpService
-          .createUser(this.singup.value as ICreateUser)
+        this.signUpService
+          .createUser(this.signup.value as ICreateUser)
           .subscribe((isValid) => isValid);
         this.isInDatabase = false;
       }

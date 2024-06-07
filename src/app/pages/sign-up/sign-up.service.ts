@@ -4,12 +4,12 @@ import { environment } from '../../../environments/environment.development';
 import { v4 } from 'uuid';
 import bcrypt from 'bcryptjs';
 import { IUser, RolesUser } from '../../../models/user.model';
-import { ICreateUser, KeysUser } from './sing-up';
+import { ICreateUser, KeysUser } from './sign-up';
 import { forkJoin } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class SingUpService {
+export class SignUpService {
   constructor(private http: HttpClient) {}
   listsUsers: IUser[] = [];
 
@@ -30,12 +30,5 @@ export class SingUpService {
     this.http.post<Response>(`${environment.hostApiUrl}/alls`, user);
     return this.http.post<Response>(url, user);
   }
-  foundAllUsers() {
-    const listRoles: RolesUser[] = ['student', 'teacher', 'admin'];
-    const observables = listRoles.map((role: RolesUser) => {
-      const url = `${environment.hostApiUrl}/${role}s`;
-      return this.http.get<Response>(url);
-    });
-    return forkJoin(observables);
-  }
+
 }

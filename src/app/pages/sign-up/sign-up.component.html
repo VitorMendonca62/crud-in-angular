@@ -4,44 +4,44 @@
 >
   <form
     class="bg-light px-5 py-3"
-    [formGroup]="singup"
-    (submit)="userSingUp()"
-    *ngIf="singup"
+    [formGroup]="signup"
+    (submit)="userSignUp()"
+    *ngIf="signup"
   >
     <h2>Cadastro</h2>
     <app-input-forms
       [props]="inputNumber"
-      [singup]="singup"
+      [formGroup]="signup"
       [isSubmit]="isSubmit"
     ></app-input-forms>
     <app-input-forms
       [props]="inputName"
-      [singup]="singup"
+      [formGroup]="signup"
       [isSubmit]="isSubmit"
     ></app-input-forms>
     <app-input-forms
       [props]="inputEmail"
-      [singup]="singup"
+      [formGroup]="signup"
       [isSubmit]="isSubmit"
     ></app-input-forms>
     <app-input-forms
       [props]="inputPassword"
-      [singup]="singup"
+      [formGroup]="signup"
       [isSubmit]="isSubmit"
     ></app-input-forms>
     <app-input-forms
       [props]="inputConfirmPassword"
-      [singup]="singup"
+      [formGroup]="signup"
       [isSubmit]="isSubmit"
     ></app-input-forms>
 
     <div>
-      <label class="form-label" for="select-singup">Cargo</label>
+      <label class="form-label" for="select-signup">Cargo</label>
       <select
         class="form-select form-select-sm w-16"
         aria-label=".form-select-sm example"
         name="role"
-        id="select-singup"
+        id="select-signup"
         formControlName="role"
       >
         <option selected value="student">Estudante</option>

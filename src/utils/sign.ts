@@ -1,7 +1,7 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MustMatchPassword } from './user';
 
-export const takeFormGroup = () =>
+export const takeFormGroupSignUp = () =>
   new FormGroup(
     {
       number: new FormControl('111111', [
@@ -29,3 +29,15 @@ export const takeFormGroup = () =>
     },
     { validators: MustMatchPassword() }
   );
+
+export const takeFormGroupSignIn = () =>
+  new FormGroup({
+    email: new FormControl('sla123@gmail.com', [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: new FormControl('12345678', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+  });

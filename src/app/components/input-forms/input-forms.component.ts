@@ -19,7 +19,7 @@ import { GlobalEventService } from '../../services/eventEmit.service';
 })
 export class InputFormsComponent implements OnChanges {
   @Input() props!: IPropsInput;
-  @Input() singup!: FormGroup;
+  @Input() formGroup!: FormGroup;
   @Input() isSubmit: boolean = false;
 
   constructor(
@@ -56,13 +56,13 @@ export class InputFormsComponent implements OnChanges {
 
   ngOnInit() {
     this.globalEventService.events$.subscribe((data) => {
-      this.singup = data.singup;
+      this.formGroup = data.formGroup;
       this.handlErrors();
     });
   }
 
   handlErrors(): undefined {
-    const errors = this.singup.get(this.props.nameInput)
+    const errors = this.formGroup.get(this.props.nameInput)
       ?.errors as ValidationMessages;
 
     const inputElement = document.querySelector(

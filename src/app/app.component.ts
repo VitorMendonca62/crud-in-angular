@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { SingUpService } from './pages/sing-up/sing-up.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +10,10 @@ import { SingUpService } from './pages/sing-up/sing-up.service';
 })
 export class AppComponent {
   title = 'seduc';
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.isAuthenticated();
+  }
 }

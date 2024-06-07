@@ -1,4 +1,4 @@
-<div class="mb-3" [formGroup]="singup">
+<div class="mb-3" [formGroup]="formGroup">
   <label class="form-label" for="{{ props.title }}-{{ props.type }}">{{
     props.title
   }}</label>
@@ -11,7 +11,7 @@
     formControlName="{{ props.nameInput }}"
     (change)="handlErrors()"
   />
-  <div *ngIf="singup.get(props.nameInput)?.invalid && isSubmit" class="text-danger">
+  <div *ngIf="formGroup.get(props.nameInput)?.invalid && isSubmit" class="text-danger">
     <span>{{ message }}</span>
   </div>
 </div>
