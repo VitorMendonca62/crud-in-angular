@@ -1,12 +1,17 @@
-<div class="mb-3 ">
-  <label class="form-label" for="{{ props?.title }}-{{ props?.type }}">{{ props?.title }}</label>
+<div class="mb-3" [formGroup]="singup">
+  <label class="form-label" for="{{ props.title }}-{{ props.type }}">{{
+    props.title
+  }}</label>
   <input
-    type="{{ props?.type }}"
-    name="{{ props?.nameInput }}"
-    placeholder="{{ props?.placeholder }}"
-    id="{{ props?.title }}-{{ props?.type }}"
-    class="form-control"
+    type="{{ props.type }}"
+    name="{{ props.nameInput }}"
+    placeholder="{{ props.placeholder }}"
+    id="{{ props.nameInput }}-{{ props.type }}"
+    class="form-control border border border-secondary"
+    formControlName="{{ props.nameInput }}"
+    (change)="handlErrors()"
   />
-  <span id="{{ props?.nameInput }}"></span>
-  <input type="hidden" className="border-red" />
+  <div *ngIf="singup.get(props.nameInput)?.invalid && isSubmit" class="text-danger">
+    <span>{{ message }}</span>
+  </div>
 </div>

@@ -1,7 +1,13 @@
-<form class="bg-light px-5 py-3">
-  <h2>Login</h2>
-  <app-input-forms [props]="inputEmail"></app-input-forms>
-  <app-input-forms [props]="inputPassword"></app-input-forms>
+<div
+  class="bg-dark d-flex align-items-center justify-content-center"
+  style="height: 100vh; width: 100vw"
+>
+  <form class="bg-light px-5 py-3">
+    <h2>Login</h2>
+    <app-input-forms [props]="inputEmail"></app-input-forms>
+    <app-input-forms [props]="inputPassword"></app-input-forms>
 
-  <app-button [props]="buttonSubmit"></app-button>
-</form>
+    <button class="btn btn-primary my-3" type="submit">Entrar</button>
+
+  </form>
+</div>

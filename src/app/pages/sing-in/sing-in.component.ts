@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
-import { ButtonComponent } from '../../components/button/button.component';
 
 @Component({
   selector: 'app-singin',
   standalone: true,
-  imports: [InputFormsComponent, ButtonComponent],
+  imports: [InputFormsComponent,],
   templateUrl: './sing-in.component.html',
   styles: [
     `
@@ -30,8 +29,5 @@ export class SingInComponent {
     type: 'password',
   };
 
-  buttonSubmit: IPropsButton = {
-    type: 'submit',
-    text: 'Cadastrar',
-  };
+
 }

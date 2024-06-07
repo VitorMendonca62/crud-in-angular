@@ -1,20 +1,55 @@
-<form class="bg-light px-5 py-3">
-  <h2>Cadastro</h2>
-  <app-input-forms [props]="inputName"></app-input-forms>
-  <app-input-forms [props]="inputEmail"></app-input-forms>
-  <app-input-forms [props]="inputPassword"></app-input-forms>
-  <app-input-forms [props]="inputConfirmPassword"></app-input-forms>
-
-  <select
-    class="form-select form-select-sm w-16"
-    aria-label=".form-select-sm example"
+<div
+  class="bg-dark d-flex align-items-center justify-content-center"
+  style="height: 100vh; width: 100vw"
+>
+  <form
+    class="bg-light px-5 py-3"
+    [formGroup]="singup"
+    (submit)="userSingUp()"
+    *ngIf="singup"
   >
-    <option selected>Open this select menu</option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
-  </select>
+    <h2>Cadastro</h2>
+    <app-input-forms
+      [props]="inputNumber"
+      [singup]="singup"
+      [isSubmit]="isSubmit"
+    >
+      <app-input-forms
+        [props]="inputName"
+        [singup]="singup"
+        [isSubmit]="isSubmit"
+      ></app-input-forms>
+    </app-input-forms>
+    <app-input-forms
+      [props]="inputEmail"
+      [singup]="singup"
+      [isSubmit]="isSubmit"
+    ></app-input-forms>
+    <app-input-forms
+      [props]="inputPassword"
+      [singup]="singup"
+      [isSubmit]="isSubmit"
+    ></app-input-forms>
+    <app-input-forms
+      [props]="inputConfirmPassword"
+      [singup]="singup"
+      [isSubmit]="isSubmit"
+    ></app-input-forms>
 
-  <app-button [props]="buttonSubmit"></app-button>
-
-</form>
+    <div>
+      <label class="form-label" for="select-singup">Cargo</label>
+      <select
+        class="form-select form-select-sm w-16"
+        aria-label=".form-select-sm example"
+        name="role"
+        id="select-singup"
+        formControlName="role"
+      >
+        <option selected value="student">Estudante</option>
+        <option value="teacher">Professor</option>
+        <option value="admin">Administrador</option>
+      </select>
+    </div>
+    <button class="btn btn-primary my-3" type="submit">Cadastrar</button>
+  </form>
+</div>

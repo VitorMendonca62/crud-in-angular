@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './components/layout/header/header.component';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { SingUpService } from './pages/sing-up/sing-up.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
