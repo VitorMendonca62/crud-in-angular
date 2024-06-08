@@ -76,31 +76,31 @@ export class SignInComponent {
   handleLoginSucess(role: RolesUser | undefined) {
     if (role) {
       this.authService.authenticate(role);
-      setTimeout(() => this.router.navigate(["dashboard"]), 3500);
+      setTimeout(() => this.router.navigate(['dashboard']), 3500);
     }
   }
 
-  async handleLogin() {
+  async handleLogin(): Promise<void> {
     const userInput = this.signin.value as ILoginUser;
-    const response = await this.signInService.loginUser(userInput);
+    const response = this.signInService.loginUser(userInput);
 
-    // this.messageAlert = response.msg;
-    // this.showAlert();
-    // this.cd.detectChanges();
+    this.messageAlert = (await response).msg;
+    this.showAlert();
+    this.cd.detectChanges();
 
-    // if (!response.error) {
-    //   this.handleLoginSucess(response.role);
-    // }
+    if (!(await response).error) {
+      this.handleLoginSucess((await response).role);
+    }
   }
 
   async userSignIn(): Promise<undefined> {
     this.isSubmit = true;
 
     if (!this.signin.valid) {
-      // this.globalEventService.emitEvent({ formGroup: this.signin });
+      this.globalEventService.emitEvent({ formGroup: this.signin });
       return;
     }
-    // this.handleLogin();
+    this.handleLogin();
 
     return;
   }

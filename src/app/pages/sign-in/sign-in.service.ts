@@ -13,12 +13,27 @@ import { UsersService } from '../../services/users.service';
 })
 export class SignInService {
   constructor(private http: HttpClient, private usersService: UsersService) {}
-  listsUsers: IUser[] = [];
-  user: IUser | undefined;
-  dataReturned!: { error: boolean; msg: string };
+  private user: IUser | undefined;
+  private email!: string;
 
-  loginUser(inputUser: ILoginUser)/* : Promise<IResponse> */ {
+  async foundUser(): Promise<IUser | undefined> {
+    const users = await this.usersService.foundAllUsers();
+    let i = 0;
+    let running = true;
+    let user: IUser | undefined;
+
+    while (i < users.length && running) {
+      user = users[i];
+      running = user.email !== this.email.toLowerCase();
+      i += 1;
+    }
+
+    return user;
+  }
+
+  async loginUser(inputUser: ILoginUser): Promise<IResponse> {
     const { email, password } = inputUser;
+    this.email = email;
 
     const errorEmailOrPassword = (): IResponse => {
       return {
@@ -28,43 +43,27 @@ export class SignInService {
       };
     };
 
-    const foundUser = (usersInRoles: IUser[][]) => {
-      usersInRoles.forEach((usersInRole: IUser[]) => {
-        usersInRole.forEach((user: IUser) => {
-          if (user.email === email.toLowerCase()) {
-            this.user = user;
-          }
-        });
-      });
-      return this.user;
-    };
-
     const verifyPassword = (password: string) => {
       return bcrypt.compareSync(password, (this.user as IUser).password);
     };
 
-    // return new Promise((resolve, reject) => {
-    //   this.usersService.foundAllUsers().forEach((usersInRoles: Response[]) => {
-    //     foundUser(usersInRoles as unknown as IUser[][]);
+    this.user = await this.foundUser();
 
-    //     if (this.user == undefined) {
-    //       resolve(errorEmailOrPassword());
-    //       return;
-    //     }
+    console.log(this.user);
+    if (this.user == undefined) {
+      return errorEmailOrPassword();
+    }
 
-    //     const passwordIsCorrect = verifyPassword(password);
+    const passwordIsCorrect = verifyPassword(password);
 
-    //     if (!passwordIsCorrect) {
-    //       resolve(errorEmailOrPassword());
-    //       return;
-    //     }
+    if (!passwordIsCorrect) {
+      return errorEmailOrPassword();
+    }
 
-    //     resolve({
-    //       error: false,
-    //       msg: 'Logado com sucesso',
-    //       role: this.user.role,
-    //     });
-    //   });
-    // });
+    return {
+      error: false,
+      msg: 'Logado com sucesso',
+      role: this.user.role,
+    };
   }
 }
