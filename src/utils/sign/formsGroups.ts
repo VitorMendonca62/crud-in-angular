@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MustMatchPassword } from './user';
+import { MustMatchPassword } from '../user';
 
 export const takeFormGroupSignUp = () =>
   new FormGroup(
@@ -56,38 +56,3 @@ export const takeFormGroupEdit = (
     name: new FormControl(name, [Validators.required, Validators.minLength(4)]),
     email: new FormControl(email, [Validators.required, Validators.email]),
   });
-
-export const inputNumber: IPropsInput = {
-  title: 'Matrícula',
-  nameInput: 'number',
-  placeholder: '123456',
-  type: 'text',
-};
-
-export const inputName: IPropsInput = {
-  title: 'Nome completo',
-  nameInput: 'name',
-  placeholder: 'Nome completo',
-  type: 'text',
-};
-
-export const inputEmail: IPropsInput = {
-  title: 'Email',
-  nameInput: 'email',
-  placeholder: 'exemplo@exemplo.com',
-  type: 'email',
-};
-
-export const inputPassword: IPropsInput = {
-  title: 'Senha',
-  nameInput: 'password',
-  placeholder: '*********',
-  type: 'password',
-};
-
-export const inputConfirmPassword: IPropsInput = {
-  title: 'Confirmar senha',
-  nameInput: 'confirmPassword',
-  placeholder: '**********',
-  type: 'password',
-};

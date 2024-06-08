@@ -3,8 +3,6 @@ import { IUser, RolesUser } from '../../models/user.model';
 import { environment } from '../../environments/environment.development';
 import { forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IResponse } from '../pages/sign-in/sign-in';
-import { IResponseWithOutRole } from '../pages/sign-up/sign-up';
 import { IResponseWithOurRoleWithUsers } from '../pages/dashboard/dashboard';
 
 @Injectable({
@@ -15,7 +13,7 @@ export class UsersService {
 
   users: IUser[] = [];
 
-  joinAllUsers(usersInRoles: IUser[][]) {
+  joinAllUsers(usersInRoles: IUser[][]): void {
     this.users = [];
     usersInRoles.forEach((usersInRole: IUser[]) =>
       usersInRole.forEach((user: IUser) => this.users.push(user))
@@ -41,21 +39,20 @@ export class UsersService {
   }
 
   async foundUser(email: string): Promise<IUser | undefined> {
+    email = email.toLowerCase();
+
     const users = await this.foundAllUsers();
+    let user: IUser | undefined;
+
     let i = 0;
     let running = true;
-    let user: IUser | undefined;
-    email = email.toLowerCase();
 
     while (i < users.length && running) {
       user = users[i];
       running = user.email !== email;
       i += 1;
     }
-    if (!running) {
-      return user;
-    }
-    return undefined;
+    return running ? undefined : user;
   }
 
   async deleteUser(
@@ -68,7 +65,7 @@ export class UsersService {
       this.users.splice(indexUser, 1);
 
       const url = `${environment.hostApiUrl}/${role}s/${user.id}`;
-      this.http.delete(url).subscribe((isValid) => isValid);
+      this.http.delete(url).subscribe();
       return {
         error: false,
         msg: 'Usuário deletado com sucesso',

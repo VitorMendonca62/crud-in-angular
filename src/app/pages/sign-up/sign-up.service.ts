@@ -6,24 +6,20 @@ import bcrypt from 'bcryptjs';
 import { IUser, RolesUser } from '../../../models/user.model';
 import { ICreateUser, IResponseWithOutRole } from './sign-up';
 import { UsersService } from '../../services/users.service';
+import { PermissionsService } from '../../services/permissions.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignUpService {
-  constructor(public http: HttpClient, private usersService: UsersService) {}
+  constructor(
+    public http: HttpClient,
+    private usersService: UsersService,
+    public  permissionsService: PermissionsService
+  ) {}
   listsUsers: IUser[] = [];
   isInDatabase: boolean = false;
   messageAlert: string = '';
-
-  public definePermission(role: RolesUser, userRole: RolesUser): boolean {
-    const adminPermission =
-      userRole === 'admin' && ['teacher', 'admin', 'student'].includes(role);
-    const teacherPermission = userRole === 'teacher' && role === 'student';
-    const studentPermission = userRole === 'student' && false;
-
-    return adminPermission || teacherPermission || studentPermission;
-  }
 
   private verifyUser(user: IUser, email: string, number: string): boolean {
     if (user.email === email) {
@@ -61,8 +57,8 @@ export class SignUpService {
     newUser: ICreateUser,
     userRole: RolesUser
   ): Promise<IResponseWithOutRole> {
-    const { email, name, password, role, number } = newUser;
-
+    const { email: _email, name, password: _password, role, number } = newUser;
+    const email = _email.toLowerCase();
     const isInDatabase = await this.verifyIsInDatabase(email, number);
 
     if (!isInDatabase) {
@@ -72,19 +68,25 @@ export class SignUpService {
       };
     }
     const url = `${environment.hostApiUrl}/${newUser.role}s`;
-    const passworHash = bcrypt.hashSync(password, 10);
+    const password = bcrypt.hashSync(_password, 10);
 
-    if (this.definePermission(role, userRole)) {
+    const canModificateUser = this.permissionsService.permissionModificateUser(
+      role,
+      userRole
+    );
+
+    if (canModificateUser) {
+      const id = v4();
       const observable = this.http.post<Response>(url, {
-        id: v4(),
+        id,
         number,
         name,
-        email: email.toLowerCase(),
+        email,
         role,
-        password: passworHash,
+        password,
       });
 
-      observable.subscribe((response) => response);
+      observable.subscribe();
 
       return {
         error: false,

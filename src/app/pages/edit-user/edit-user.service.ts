@@ -38,7 +38,12 @@ export class EditUserService extends SignUpService {
 
     const url = `${environment.hostApiUrl}/${role}s/${id}`;
 
-    if (super.definePermission(role, userRole)) {
+    const canModificateUser = super.permissionsService.permissionModificateUser(
+      role,
+      userRole
+    );
+
+    if (canModificateUser) {
       const observable = this.http.patch<Response>(url, {
         number,
         name,

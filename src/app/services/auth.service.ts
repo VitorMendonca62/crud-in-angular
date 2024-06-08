@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { v4 } from 'uuid';
-import { environment } from '../../environments/environment';
 import { RolesUser } from '../../models/user.model';
 @Injectable({
   providedIn: 'root',
@@ -26,31 +24,6 @@ export class AuthService {
     }
 
     return true;
-  }
-
-  permissionInSignUp() {
-    const result = this.isAuthenticated(false)
-    const role = localStorage.getItem('role') as RolesUser | null;
-
-    if (role == null || !result) {
-      this.router.navigate(['/login']);
-      return false;
-    }
-
-    if (!['teacher', 'admin'].includes(role)) {
-      this.router.navigate(['/dashboard']);
-      return false;
-    }
-    return true;
-  }
-
-  permissionInSignIn() {
-    const result = !this.isAuthenticated(true);
-
-    if (!result) {
-      this.router.navigate(['/dashboard']);
-    }
-    return result;
   }
 
   authenticate(role: RolesUser) {

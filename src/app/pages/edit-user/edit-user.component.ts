@@ -11,8 +11,8 @@ import {
   inputPassword,
   inputName,
   inputNumber,
-  takeFormGroupEdit,
-} from '../../../utils/sign';
+} from '../../../utils/sign/inputs';
+import { takeFormGroupEdit } from '../../../utils/sign/formsGroups';
 import { IInputsEdit, IUserEdit } from './edit';
 import { CommonModule } from '@angular/common';
 import { EditUserService } from './edit-user.service';
@@ -56,7 +56,7 @@ export class EditUserComponent {
   }
 
   async takeUser() {
-    console.log(this.email)
+    console.log(this.email);
     return await this.usersService.foundUser(this.email);
   }
 
@@ -69,7 +69,7 @@ export class EditUserComponent {
     this.user = await this.takeUser();
     this.defineFormGroupEdit();
 
-    console.log(this.user)
+    console.log(this.user);
     if (!this.edit || this.user == undefined) {
       this.router.navigate(['dashboard']);
     }

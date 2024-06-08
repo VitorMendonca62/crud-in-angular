@@ -11,12 +11,12 @@ import { SignInService } from './sign-in.service';
 import {
   inputEmail,
   inputPassword,
-  takeFormGroupSignIn,
-} from '../../../utils/sign';
+  } from '../../../utils/sign/inputs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { RolesUser } from '../../../models/user.model';
 import { Router } from '@angular/router';
+import { takeFormGroupSignIn } from '../../../utils/sign/formsGroups';
 
 @Component({
   selector: 'app-signin',

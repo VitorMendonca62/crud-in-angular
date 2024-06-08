@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import {
-  ActivatedRoute,
-  Router,
   RouterLink,
   RouterLinkActive,
   RouterOutlet,
-  Routes,
 } from '@angular/router';
 
 @Component({
@@ -15,7 +12,6 @@ import {
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'seduc';
 
-  constructor(private router: Router) {}
+  constructor() {}
 }

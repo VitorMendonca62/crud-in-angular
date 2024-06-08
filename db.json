@@ -1,5 +1,14 @@
 {
-  "students": [],
+  "students": [
+    {
+      "id": "8f485453-5572-4340-93a5-8634c9455a84",
+      "number": "111111",
+      "name": "awdawdawdawdaw",
+      "email": "sla1231@gmail.com",
+      "role": "student",
+      "password": "$2a$10$DIM8n3s8gMg6t4gWqPi4CutT0NDpsIcf8Oj/oZmXmUoyDa6x74yii"
+    }
+  ],
   "teachers": [],
   "admins": [
     {
