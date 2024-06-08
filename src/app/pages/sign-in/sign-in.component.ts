@@ -6,11 +6,14 @@ import {
 import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { GlobalEventService } from '../../services/eventEmit.service';
-import { ILoginUser } from './sign';
+import { ILoginUser, IResponse } from './sign-in';
 import { SignInService } from './sign-in.service';
 import { takeFormGroupSignIn } from '../../../utils/sign';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { RolesUser } from '../../../models/user.model';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-signin',
   standalone: true,
@@ -34,7 +37,8 @@ export class SignInComponent {
     private globalEventService: GlobalEventService,
     private signInService: SignInService,
     private cd: ChangeDetectorRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   inputEmail: IPropsInput = {
@@ -69,6 +73,26 @@ export class SignInComponent {
     this.isInDatabase = false;
   }
 
+  handleLoginSucess(role: RolesUser | undefined) {
+    if (role) {
+      this.authService.authenticate(role);
+      setTimeout(() => this.router.navigate(["dashboard"]), 3500);
+    }
+  }
+
+  async handleLogin() {
+    const userInput = this.signin.value as ILoginUser;
+    const response = await this.signInService.loginUser(userInput);
+
+    this.messageAlert = response.msg;
+    this.showAlert();
+    this.cd.detectChanges();
+
+    if (!response.error) {
+      this.handleLoginSucess(response.role);
+    }
+  }
+
   async userSignIn(): Promise<undefined> {
     this.isSubmit = true;
 
@@ -76,20 +100,7 @@ export class SignInComponent {
       this.globalEventService.emitEvent({ formGroup: this.signin });
       return;
     }
-    const response = (await this.signInService.loginUser(
-      this.signin.value as ILoginUser
-    )) as { error: boolean; msg: string };
-
-    this.messageAlert = response.msg;
-    this.showAlert();
-    this.cd.detectChanges();
-
-    if (!response.error) {
-      this.authService.authenticate();
-      setTimeout(() => {
-        location.href = '/dashboard';
-      }, 3500);
-    }
+    this.handleLogin();
 
     return;
   }

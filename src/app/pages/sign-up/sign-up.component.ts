@@ -12,6 +12,7 @@ import { ICreateUser } from './sign-up';
 import { IUser } from '../../../models/user.model';
 import { takeFormGroupSignUp } from '../../../utils/sign';
 import { UsersService } from '../../services/users.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -38,7 +39,8 @@ export class SignUpComponent {
     private globalEventService: GlobalEventService,
     private signUpService: SignUpService,
     private usersService: UsersService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private authService: AuthService
   ) {}
 
   inputNumber: IPropsInput = {
@@ -84,24 +86,11 @@ export class SignUpComponent {
   }
 
   ngOnInit(): void {
+    this.authService.permissionInSignUp();
     this.defineFormGroupSignUp();
   }
 
   isSubmit = false;
-
-  verifyIsInDatabase(email: string, number: string, user: IUser) {
-    if (user.email === email || user.number === number) {
-      this.isInDatabase = true;
-      if (user.email === email) {
-        this.messageAlert =
-          'Já existe um usuário com esse email. Tente novamente';
-      }
-      if (user.number === number) {
-        this.messageAlert =
-          'Já existe um usuário com essa matrícula. Tente novamente';
-      }
-    }
-  }
 
   showAlert() {
     document.querySelector('[role=alert]')?.classList.remove('hide');
@@ -109,32 +98,23 @@ export class SignUpComponent {
     this.isInDatabase = false;
   }
 
-  userSignUp(): undefined {
+  async userSignUp(): Promise<undefined> {
     this.isSubmit = true;
 
     if (!this.signup.valid) {
       this.globalEventService.emitEvent({ formGroup: this.signup });
       return;
     }
-    const { email, number } = this.signup.value as ICreateUser;
 
-    this.usersService.foundAllUsers().subscribe((response: Response[]) => {
-      response.forEach((listRole: any) => {
-        listRole.forEach((user: IUser) =>
-          this.verifyIsInDatabase(email, number, user)
-        );
-      });
+    const response = await this.signUpService.createUser(
+      this.signup.value as ICreateUser
+    );
+    this.messageAlert = response.msg;
+    this.isInDatabase = response.error;
 
-      if (this.isInDatabase) {
-        this.showAlert();
-        return;
-      } else {
-        this.signUpService
-          .createUser(this.signup.value as ICreateUser)
-          .subscribe((isValid) => isValid);
-        this.isInDatabase = false;
-      }
-      this.cd.detectChanges();
-    });
+    if (this.isInDatabase) {
+      this.showAlert();
+    }
+    this.cd.detectChanges();
   }
 }
