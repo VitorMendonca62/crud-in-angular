@@ -3,7 +3,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AppComponent } from './app.component';
-import { authGuard, noAuthGuard, singUphGuard } from './auth.guard';
+import { authGuard, noAuthGuard, signUpGuard } from './auth.guard';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 
 export const routes: Routes = [
@@ -34,12 +34,12 @@ export const routes: Routes = [
         path: 'cadastro',
         pathMatch: 'full',
         component: SignUpComponent,
-        canActivate: [singUphGuard],
+        canActivate: [signUpGuard],
       },
       {
         path: 'edito/:email',
         component: EditUserComponent,
-        canActivate: [singUphGuard],
+        canActivate: [signUpGuard],
       },
     ],
   },

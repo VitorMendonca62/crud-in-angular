@@ -14,8 +14,8 @@ import { PermissionsService } from '../../services/permissions.service';
 export class SignUpService {
   constructor(
     public http: HttpClient,
-    private usersService: UsersService,
-    public  permissionsService: PermissionsService
+    public usersService: UsersService,
+    public permissionsService: PermissionsService
   ) {}
   listsUsers: IUser[] = [];
   isInDatabase: boolean = false;

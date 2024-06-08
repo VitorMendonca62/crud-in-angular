@@ -11,6 +11,11 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
   return inject(PermissionsService).permissionAcessInSignIn();
 };
 
-export const singUphGuard: CanActivateFn = (route, state) => {
+export const signUpGuard: CanActivateFn = (route, state) => {
   return inject(PermissionsService).permissionAcessInSignUp();
+};
+
+export const editGuard: CanActivateFn = async (route, state) => {
+  const emailParams = (route.params as { email: string }).email;
+  return inject(PermissionsService).permissionAcessInEdit(emailParams);
 };

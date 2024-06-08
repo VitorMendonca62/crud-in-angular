@@ -16,6 +16,7 @@ import { takeFormGroupEdit } from '../../../utils/sign/formsGroups';
 import { IInputsEdit, IUserEdit } from './edit';
 import { CommonModule } from '@angular/common';
 import { EditUserService } from './edit-user.service';
+import { showAlert } from '../../../utils/general';
 
 @Component({
   selector: 'app-edit-user',
@@ -27,6 +28,7 @@ export class EditUserComponent {
   email!: string;
   user!: IUser | undefined;
   messageAlert!: string;
+  isInDatabase: boolean = false;
 
   constructor(
     private router: Router,
@@ -69,8 +71,7 @@ export class EditUserComponent {
     this.user = await this.takeUser();
     this.defineFormGroupEdit();
 
-    console.log(this.user);
-    if (!this.edit || this.user == undefined) {
+    if (this.user == undefined || this.user.role === 'admin') {
       this.router.navigate(['dashboard']);
     }
   }
@@ -89,11 +90,6 @@ export class EditUserComponent {
     this.cd.detectChanges();
   }
 
-  showAlert() {
-    document.querySelector('[role=alert]')?.classList.toggle('hide');
-    document.querySelector('[role=alert]')?.classList.toggle('show');
-  }
-
   async handleEdit(): Promise<void> {
     this.isSubmit = true;
 
@@ -109,12 +105,25 @@ export class EditUserComponent {
     );
 
     this.messageAlert = (await response).msg;
-    this.showAlert();
+    this.isInDatabase = (await response).error;
+
+    showAlert();
     this.cd.detectChanges();
 
-    if (!(await response).error) {
-      setTimeout(() => this.router.navigate(['dashboard']), 3500);
-    }
+    const button = document.querySelector(
+      'button[type=submit]'
+    ) as HTMLButtonElement;
+
+    button.disabled = true;
+
+    setTimeout(() => {
+      if (!this.isInDatabase) {
+        this.router.navigate(['dashboard']);
+      }
+
+      showAlert();
+      button.disabled = false;
+    }, 3500);
   }
 
   async userEdit(): Promise<undefined> {

@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
-import { IUser, RolesUser } from '../../../models/user.model';
+import { RolesUser } from '../../../models/user.model';
 import { IUserEdit } from './edit';
 import { SignUpService } from '../sign-up/sign-up.service';
 import { environment } from '../../../environments/environment.development';
+import { PermissionsService } from '../../services/permissions.service';
+import { HttpClient } from '@angular/common/http';
+import { UsersService } from '../../services/users.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EditUserService extends SignUpService {
+  constructor(
+    http: HttpClient,
+    usersService: UsersService,
+    permissionsService: PermissionsService
+  ) {
+    super(http, usersService, permissionsService);
+  }
   async editUser(
     user: IUserEdit,
     role: RolesUser,
@@ -38,10 +48,11 @@ export class EditUserService extends SignUpService {
 
     const url = `${environment.hostApiUrl}/${role}s/${id}`;
 
-    const canModificateUser = super.permissionsService.permissionModificateUser(
+    const canModificateUser = this.permissionsService.permissionModificateUser(
       role,
       userRole
     );
+
 
     if (canModificateUser) {
       const observable = this.http.patch<Response>(url, {

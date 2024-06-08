@@ -1,15 +1,24 @@
 {
   "students": [
     {
-      "id": "8f485453-5572-4340-93a5-8634c9455a84",
+      "id": "712eff1c-2143-4b65-ba0e-8fbf8201cc42",
       "number": "111111",
       "name": "awdawdawdawdaw",
-      "email": "sla1231@gmail.com",
+      "email": "djmawjuf@gmail.com",
       "role": "student",
-      "password": "$2a$10$DIM8n3s8gMg6t4gWqPi4CutT0NDpsIcf8Oj/oZmXmUoyDa6x74yii"
+      "password": "$2a$10$7aptiaDbyXJye8wgRjm5d.JCSe6gLwGambQPxLmDt/L52XBLsgRQa"
     }
   ],
-  "teachers": [],
+  "teachers": [
+    {
+      "id": "e330bbe1-9d63-4b9b-bb21-531844d07f85",
+      "number": "131313",
+      "name": "awdawdawdawdaw",
+      "email": "sla12daw3@gmail.com",
+      "role": "teacher",
+      "password": "$2a$10$Y70aXM4wTpRhuU4UX7zf3Ou.QcV5ziG0.XrR9IL/ULpHnPDpv0oHO"
+    }
+  ],
   "admins": [
     {
       "id": "e0271ffd-ec22-462b-b601-f78d710599c1",
