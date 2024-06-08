@@ -29,9 +29,10 @@ export class AuthService {
   }
 
   permissionInSignUp() {
+    const result = this.isAuthenticated(false)
     const role = localStorage.getItem('role') as RolesUser | null;
 
-    if (role == null) {
+    if (role == null || !result) {
       this.router.navigate(['/login']);
       return false;
     }

@@ -9,10 +9,11 @@ import { CommonModule } from '@angular/common';
 import { GlobalEventService } from '../../services/eventEmit.service';
 import { SignUpService } from './sign-up.service';
 import { ICreateUser } from './sign-up';
-import { IUser } from '../../../models/user.model';
+import { IUser, RolesUser } from '../../../models/user.model';
 import { takeFormGroupSignUp } from '../../../utils/sign';
 import { UsersService } from '../../services/users.service';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -31,16 +32,17 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignUpComponent {
   isInDatabase: boolean = false;
-  messageAlert: string =
-    'Já existe um usuário com esses dados. Tente novamente';
+  messageAlert!: string;
+  userRole!: RolesUser;
 
   // Inputs
   constructor(
     private globalEventService: GlobalEventService,
     private signUpService: SignUpService,
-    private usersService: UsersService,
+    private router: Router,
     private cd: ChangeDetectorRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private usersService: UsersService
   ) {}
 
   inputNumber: IPropsInput = {
@@ -81,6 +83,10 @@ export class SignUpComponent {
   // Inputs Validation
   public signup!: FormGroup;
 
+  takeRoleInStorage() {
+    this.userRole = localStorage.getItem('role') as RolesUser;
+  }
+
   defineFormGroupSignUp(): void {
     this.signup = takeFormGroupSignUp();
   }
@@ -88,14 +94,31 @@ export class SignUpComponent {
   ngOnInit(): void {
     this.authService.permissionInSignUp();
     this.defineFormGroupSignUp();
+    this.takeRoleInStorage();
+
+    this.usersService.foundAllUsers();
   }
 
   isSubmit = false;
 
+  toDashboard() {
+    this.router.navigate(['dashboard']);
+  }
+
   showAlert() {
-    document.querySelector('[role=alert]')?.classList.remove('hide');
-    document.querySelector('[role=alert]')?.classList.add('show');
+    document.querySelector('[role=alert]')?.classList.toggle('hide');
+    document.querySelector('[role=alert]')?.classList.toggle('show');
+  }
+
+  clearAllInputs() {
+    this.defineFormGroupSignUp();
+    this.isSubmit = false;
     this.isInDatabase = false;
+
+    document.querySelectorAll('input').forEach((input) => (input.value = ''));
+
+    const selectElement = document.querySelector('select');
+    if (selectElement) selectElement.value = 'student';
   }
 
   async userSignUp(): Promise<undefined> {
@@ -107,14 +130,27 @@ export class SignUpComponent {
     }
 
     const response = await this.signUpService.createUser(
-      this.signup.value as ICreateUser
+      this.signup.value as ICreateUser,
+      this.userRole
     );
+
     this.messageAlert = response.msg;
     this.isInDatabase = response.error;
 
-    if (this.isInDatabase) {
+    const button = document.querySelector('button[type=submit]') as HTMLButtonElement;
+
+    button.disabled = true;
+    this.showAlert();
+
+    setTimeout(() => {
+      if (!this.isInDatabase) {
+        this.clearAllInputs();
+      }
+
+      button.disabled = false;
       this.showAlert();
-    }
+    }, 3500);
+
     this.cd.detectChanges();
   }
 }

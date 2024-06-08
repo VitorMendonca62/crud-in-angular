@@ -7,6 +7,14 @@
       "email": "sla123@gmail.com",
       "role": "student",
       "password": "$2a$10$Oa1ba5fAJPbsd/C1tLEI8OUMu3TfrObrVMA.RXeZ0ecJAWGmV.yrS"
+    },
+    {
+      "id": "e0271ffd-ec22-462b-b601-f78d710599c1",
+      "number": "222222",
+      "name": "Vitor Hugo",
+      "email": "sla123dawd@gmail.com",
+      "role": "student",
+      "password": "$2a$10$.LjHa0GFPC.jzONPCJrTyeEr5SIPsC.Az5pAu12CmPtGfz1RY.WC2"
     }
   ],
   "teachers": [],

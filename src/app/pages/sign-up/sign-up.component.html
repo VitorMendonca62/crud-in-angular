@@ -3,11 +3,19 @@
   style="height: 100vh; width: 100%"
 >
   <form
-    class="bg-light px-5 py-3"
+    class="bg-light px-5 py-3 position-relative"
     [formGroup]="signup"
     (submit)="userSignUp()"
     *ngIf="signup"
   >
+    <button
+      type="button"
+      class="btn-close position-absolute"
+      style="right: 1rem; top: 1.5rem"
+      aria-label="Close"
+      (click)="toDashboard()"
+    ></button>
+
     <h2>Cadastro</h2>
     <app-input-forms
       [props]="inputNumber"
@@ -45,8 +53,8 @@
         formControlName="role"
       >
         <option selected value="student">Estudante</option>
-        <option value="teacher">Professor</option>
-        <option value="admin">Administrador</option>
+        <option *ngIf="userRole === 'admin'" value="teacher">Professor</option>
+        <option *ngIf="userRole === 'admin'" value="admin">Administrador</option>
       </select>
     </div>
     <button class="btn btn-primary my-3" type="submit">Cadastrar</button>
@@ -60,7 +68,7 @@
   aria-atomic="true"
 >
   <div class="d-flex">
-    <div class="toast-body">{{messageAlert}}</div>
+    <div class="toast-body">{{ messageAlert }}</div>
     <button
       type="button"
       class="btn-close btn-close-white me-2 m-auto"

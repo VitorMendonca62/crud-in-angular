@@ -17,7 +17,7 @@ export class SignInService {
   user: IUser | undefined;
   dataReturned!: { error: boolean; msg: string };
 
-  loginUser(inputUser: ILoginUser): Promise<IResponse> {
+  loginUser(inputUser: ILoginUser)/* : Promise<IResponse> */ {
     const { email, password } = inputUser;
 
     const errorEmailOrPassword = (): IResponse => {
@@ -31,7 +31,7 @@ export class SignInService {
     const foundUser = (usersInRoles: IUser[][]) => {
       usersInRoles.forEach((usersInRole: IUser[]) => {
         usersInRole.forEach((user: IUser) => {
-          if (user.email === email) {
+          if (user.email === email.toLowerCase()) {
             this.user = user;
           }
         });
@@ -43,28 +43,28 @@ export class SignInService {
       return bcrypt.compareSync(password, (this.user as IUser).password);
     };
 
-    return new Promise((resolve, reject) => {
-      this.usersService.foundAllUsers().forEach((usersInRoles: Response[]) => {
-        foundUser(usersInRoles as unknown as IUser[][]);
+    // return new Promise((resolve, reject) => {
+    //   this.usersService.foundAllUsers().forEach((usersInRoles: Response[]) => {
+    //     foundUser(usersInRoles as unknown as IUser[][]);
 
-        if (this.user == undefined) {
-          resolve(errorEmailOrPassword());
-          return;
-        }
+    //     if (this.user == undefined) {
+    //       resolve(errorEmailOrPassword());
+    //       return;
+    //     }
 
-        const passwordIsCorrect = verifyPassword(password);
+    //     const passwordIsCorrect = verifyPassword(password);
 
-        if (!passwordIsCorrect) {
-          resolve(errorEmailOrPassword());
-          return;
-        }
+    //     if (!passwordIsCorrect) {
+    //       resolve(errorEmailOrPassword());
+    //       return;
+    //     }
 
-        resolve({
-          error: false,
-          msg: 'Logado com sucesso',
-          role: this.user.role,
-        });
-      });
-    });
+    //     resolve({
+    //       error: false,
+    //       msg: 'Logado com sucesso',
+    //       role: this.user.role,
+    //     });
+    //   });
+    // });
   }
 }

@@ -84,23 +84,23 @@ export class SignInComponent {
     const userInput = this.signin.value as ILoginUser;
     const response = await this.signInService.loginUser(userInput);
 
-    this.messageAlert = response.msg;
-    this.showAlert();
-    this.cd.detectChanges();
+    // this.messageAlert = response.msg;
+    // this.showAlert();
+    // this.cd.detectChanges();
 
-    if (!response.error) {
-      this.handleLoginSucess(response.role);
-    }
+    // if (!response.error) {
+    //   this.handleLoginSucess(response.role);
+    // }
   }
 
   async userSignIn(): Promise<undefined> {
     this.isSubmit = true;
 
     if (!this.signin.valid) {
-      this.globalEventService.emitEvent({ formGroup: this.signin });
+      // this.globalEventService.emitEvent({ formGroup: this.signin });
       return;
     }
-    this.handleLogin();
+    // this.handleLogin();
 
     return;
   }
