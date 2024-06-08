@@ -6,18 +6,27 @@
       <th scope="col">Email</th>
       <th scope="col">Cargo</th>
       <th scope="col">Ações</th>
-
     </tr>
   </thead>
   <tbody *ngFor="let user of users">
-    <tr>
+    <tr *ngIf="definePermission(user.role, 'visible')">
       <td>{{ user.number }}</td>
       <td>{{ user.name }}</td>
       <td>{{ user.email }}</td>
-      <td>{{ user.role }}</td>
+      <td>{{ formatingRole(user.role) }}</td>
       <td>
-        <button>Editar</button>
-        <button>Deletar</button>
+        <button
+          *ngIf="definePermission(user.role, 'edit')"
+          (click)="handleEdit(user.email)"
+        >
+          Editar
+        </button>
+        <button
+          (click)="handleDeleteUser(user.email, user.role)"
+          *ngIf="definePermission(user.role, 'delete')"
+        >
+          Deletar
+        </button>
       </td>
     </tr>
   </tbody>

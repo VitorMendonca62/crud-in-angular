@@ -7,7 +7,15 @@ export interface ICreateUser extends _ICreateUser {
   readonly confirmPassword: string;
 }
 
-export interface IResponseSingIn {
+export interface IResponseWithOutRole {
   msg: string;
   error: boolean;
+}
+
+export interface IInputsSingUp {
+  inputNumber: IPropsInput;
+  inputName: IPropsInput;
+  inputEmail: IPropsInput;
+  inputPassword: IPropsInput;
+  inputConfirmPassword: IPropsInput;
 }

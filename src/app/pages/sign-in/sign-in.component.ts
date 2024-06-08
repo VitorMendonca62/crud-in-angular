@@ -6,9 +6,13 @@ import {
 import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { GlobalEventService } from '../../services/eventEmit.service';
-import { ILoginUser, IResponse } from './sign-in';
+import { IInputsSingIn, ILoginUser, IResponse } from './sign-in';
 import { SignInService } from './sign-in.service';
-import { takeFormGroupSignIn } from '../../../utils/sign';
+import {
+  inputEmail,
+  inputPassword,
+  takeFormGroupSignIn,
+} from '../../../utils/sign';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { RolesUser } from '../../../models/user.model';
@@ -41,19 +45,7 @@ export class SignInComponent {
     private router: Router
   ) {}
 
-  inputEmail: IPropsInput = {
-    title: 'Email',
-    nameInput: 'email',
-    placeholder: 'exemplo@exemplo.com',
-    type: 'email',
-  };
-
-  inputPassword: IPropsInput = {
-    title: 'Senha',
-    nameInput: 'password',
-    placeholder: '*********',
-    type: 'password',
-  };
+  inputs: IInputsSingIn  = { inputPassword, inputEmail };
 
   public signin!: FormGroup;
 

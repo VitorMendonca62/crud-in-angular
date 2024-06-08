@@ -8,13 +8,19 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { GlobalEventService } from '../../services/eventEmit.service';
 import { SignUpService } from './sign-up.service';
-import { ICreateUser } from './sign-up';
-import { IUser, RolesUser } from '../../../models/user.model';
+import { ICreateUser, IInputsSingUp } from './sign-up';
+import { RolesUser } from '../../../models/user.model';
 import { takeFormGroupSignUp } from '../../../utils/sign';
 import { UsersService } from '../../services/users.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-
+import {
+  inputName,
+  inputConfirmPassword,
+  inputEmail,
+  inputNumber,
+  inputPassword,
+} from '../../../utils/sign';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -45,39 +51,12 @@ export class SignUpComponent {
     private usersService: UsersService
   ) {}
 
-  inputNumber: IPropsInput = {
-    title: 'Matrícula',
-    nameInput: 'number',
-    placeholder: '123456',
-    type: 'text',
-  };
-
-  inputName: IPropsInput = {
-    title: 'Nome completo',
-    nameInput: 'name',
-    placeholder: 'Nome completo',
-    type: 'text',
-  };
-
-  inputEmail: IPropsInput = {
-    title: 'Email',
-    nameInput: 'email',
-    placeholder: 'exemplo@exemplo.com',
-    type: 'email',
-  };
-
-  inputPassword: IPropsInput = {
-    title: 'Senha',
-    nameInput: 'password',
-    placeholder: '*********',
-    type: 'password',
-  };
-
-  inputConfirmPassword: IPropsInput = {
-    title: 'Confirmar senha',
-    nameInput: 'confirmPassword',
-    placeholder: '**********',
-    type: 'password',
+  inputs: IInputsSingUp = {
+    inputName,
+    inputConfirmPassword,
+    inputEmail,
+    inputNumber,
+    inputPassword,
   };
 
   // Inputs Validation
@@ -137,7 +116,9 @@ export class SignUpComponent {
     this.messageAlert = response.msg;
     this.isInDatabase = response.error;
 
-    const button = document.querySelector('button[type=submit]') as HTMLButtonElement;
+    const button = document.querySelector(
+      'button[type=submit]'
+    ) as HTMLButtonElement;
 
     button.disabled = true;
     this.showAlert();

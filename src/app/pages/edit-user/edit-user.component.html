@@ -1,1 +1,55 @@
-<p>edit-user works!</p>
+<div
+  class="bg-dark d-flex align-items-center justify-content-center"
+  style="height: 100vh; width: 100%"
+>
+  <form
+    class="bg-light px-5 py-3 position-relative"
+    [formGroup]="edit"
+    (submit)="userEdit()"
+    *ngIf="edit"
+  >
+    <button
+      type="button"
+      class="btn-close position-absolute"
+      style="right: 1rem; top: 1.5rem"
+      aria-label="Close"
+      (click)="toDashboard()"
+    ></button>
+
+    <h2>Editar</h2>
+    <app-input-forms
+      [props]="inputs.inputNumber"
+      [formGroup]="edit"
+      [isSubmit]="isSubmit"
+    ></app-input-forms>
+    <app-input-forms
+      [props]="inputs.inputEmail"
+      [formGroup]="edit"
+      [isSubmit]="isSubmit"
+    ></app-input-forms>
+    <app-input-forms
+      [props]="inputs.inputName"
+      [formGroup]="edit"
+      [isSubmit]="isSubmit"
+    ></app-input-forms>
+
+    <button class="btn btn-primary my-3" type="submit">Editar</button>
+  </form>
+</div>
+<div
+  class="toast fade align-items-center text-white bg-warning text-white border-0 position-absolute"
+  style="top: 5rem; right: 2rem"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+>
+  <div class="d-flex">
+    <div class="toast-body">{{ messageAlert }}</div>
+    <button
+      type="button"
+      class="btn-close btn-close-white me-2 m-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+</div>

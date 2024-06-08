@@ -4,19 +4,19 @@ import { environment } from '../../../environments/environment.development';
 import { v4 } from 'uuid';
 import bcrypt from 'bcryptjs';
 import { IUser, RolesUser } from '../../../models/user.model';
-import { ICreateUser, IResponseSingIn } from './sign-up';
+import { ICreateUser, IResponseWithOutRole } from './sign-up';
 import { UsersService } from '../../services/users.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignUpService {
-  constructor(private http: HttpClient, private usersService: UsersService) {}
+  constructor(public http: HttpClient, private usersService: UsersService) {}
   listsUsers: IUser[] = [];
   isInDatabase: boolean = false;
   messageAlert: string = '';
 
-  private definePermission(role: RolesUser, userRole: RolesUser): boolean {
+  public definePermission(role: RolesUser, userRole: RolesUser): boolean {
     const adminPermission =
       userRole === 'admin' && ['teacher', 'admin', 'student'].includes(role);
     const teacherPermission = userRole === 'teacher' && role === 'student';
@@ -40,7 +40,7 @@ export class SignUpService {
     return false;
   }
 
-  private async verifyIsInDatabase(
+  public async verifyIsInDatabase(
     email: string,
     number: string
   ): Promise<boolean> {
@@ -50,7 +50,7 @@ export class SignUpService {
 
     while (i < users.length && running) {
       const user = users[i];
-      running = this.verifyUser(user, email, number);
+      running = !this.verifyUser(user, email, number);
       i += 1;
     }
 
@@ -60,12 +60,12 @@ export class SignUpService {
   public async createUser(
     newUser: ICreateUser,
     userRole: RolesUser
-  ): Promise<IResponseSingIn> {
+  ): Promise<IResponseWithOutRole> {
     const { email, name, password, role, number } = newUser;
 
     const isInDatabase = await this.verifyIsInDatabase(email, number);
 
-    if (isInDatabase) {
+    if (!isInDatabase) {
       return {
         error: true,
         msg: this.messageAlert,

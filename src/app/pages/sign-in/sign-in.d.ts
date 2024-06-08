@@ -10,3 +10,8 @@ export interface IResponse {
   msg: string;
   role: RolesUser | undefined;
 }
+
+export interface IInputsSingIn {
+  inputEmail: IPropsInput;
+  inputPassword: IPropsInput;
+}

@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.development';
-import { v4 } from 'uuid';
 import bcrypt from 'bcryptjs';
-import { IUser, RolesUser } from '../../../models/user.model';
+import { IUser } from '../../../models/user.model';
 import { ILoginUser, IResponse } from './sign-in';
 import { UsersService } from '../../services/users.service';
-// import { AuthService } from '../../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,24 +13,8 @@ export class SignInService {
   private user: IUser | undefined;
   private email!: string;
 
-  async foundUser(): Promise<IUser | undefined> {
-    const users = await this.usersService.foundAllUsers();
-    let i = 0;
-    let running = true;
-    let user: IUser | undefined;
-
-    while (i < users.length && running) {
-      user = users[i];
-      running = user.email !== this.email.toLowerCase();
-      i += 1;
-    }
-
-    return user;
-  }
-
   async loginUser(inputUser: ILoginUser): Promise<IResponse> {
     const { email, password } = inputUser;
-    this.email = email;
 
     const errorEmailOrPassword = (): IResponse => {
       return {
@@ -47,9 +28,8 @@ export class SignInService {
       return bcrypt.compareSync(password, (this.user as IUser).password);
     };
 
-    this.user = await this.foundUser();
+    this.user = await this.usersService.foundUser(email);
 
-    console.log(this.user);
     if (this.user == undefined) {
       return errorEmailOrPassword();
     }
