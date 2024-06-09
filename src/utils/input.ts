@@ -3,6 +3,7 @@ export const responseValidation = {
     required: 'Matrícula é obrigatória',
     minlength: 'Matrícula não tem 6 (seis) caracteres',
     maxlength: 'Matrícula não tem 6 (seis) caracteres',
+    pattern: 'Matrícula é um número',
   },
   name: {
     required: 'Nome é obrigatório',

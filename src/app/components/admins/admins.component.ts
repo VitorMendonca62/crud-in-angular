@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IUser, RolesUser } from '../../../models/user.model';
 import { UsersService } from '../../services/users.service';
 import { DashboardService } from '../../services/dashboard.service';
-import { KeysUser } from '../../pages/sign-up/sign-up';
+import { KeysUser } from '../layout/sign-up/sign-up';
 import { CommonModule } from '@angular/common';
-import { EmitEventService, FilterEmitEventService } from '../../services/eventEmit.service';
+import { EmitEventService, SearchEmitEventService } from '../../services/eventEmit.service';
 
 type Actions = 'visible' | 'delete' | 'edit';
 
@@ -21,7 +21,7 @@ export class AdminsComponent {
   constructor(
     private usersService: UsersService,
     private dashboardService: DashboardService,
-    private filterEmitEventService: FilterEmitEventService
+    private searchEmitEventService: SearchEmitEventService
   ) {}
 
   takeRoleInStorage() {
@@ -34,7 +34,7 @@ export class AdminsComponent {
 
   async ngOnInit() {
     this.admins = await this.takeAdmins();
-    this.filterEmitEventService.events$.subscribe((data) => {
+    this.searchEmitEventService.events$.subscribe((data) => {
       if (data.users.admins) {
         this.admins = data.users.admins;
       }

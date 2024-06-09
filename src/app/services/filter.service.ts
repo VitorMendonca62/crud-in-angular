@@ -2,29 +2,37 @@ import { Injectable } from '@angular/core';
 import { UsersService } from './users.service';
 import { FilterEmitEventService } from './eventEmit.service';
 
+type ClassFilter = 'all' | 'A' | 'B' | 'C';
+
 @Injectable({
   providedIn: 'root',
 })
 export class FilterService {
   constructor(
     private usersService: UsersService,
-    private filterEmitEventService: FilterEmitEventService
+    private filterEventEmitService: FilterEmitEventService
   ) {}
 
-  async filterUsers() {
-    const appFilter = document.querySelector('app-filter');
-    const inputElement = appFilter?.querySelector('input');
+  filterClass(classUser: ClassFilter) {
+    return this.usersService.findUsersInRole('student').then(async (users) => {
+      const appSearch = document.querySelector('app-search');
+      const inputElement = appSearch?.querySelector('input');
 
-    if (!inputElement) return;
+      const nameSearch = inputElement?.value;
 
-    const nameFilter = inputElement.value;
-    // if(nameFilter === "") {
-    //   const users =
-    //   this.usersService.finf
-    // }
+      if (nameSearch && nameSearch.length > 0) {
+        users = (await this.usersService.filterByName(nameSearch.toLowerCase()))
+          .students;
+      }
 
-    this.usersService.filterByName(nameFilter.toLowerCase()).then((users) => {
-      this.filterEmitEventService.emitEvent({ users });
+      if (classUser === 'all') {
+        this.filterEventEmitService.emitEvent({ students: users });
+        return users;
+      }
+
+      const usersFiltered = users.filter((user) => user.class === classUser);
+      this.filterEventEmitService.emitEvent({ students: usersFiltered });
+      return usersFiltered;
     });
   }
 }

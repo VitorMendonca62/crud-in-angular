@@ -8,6 +8,7 @@ export const takeFormGroupSignUp = () =>
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(6),
+        Validators.pattern('^[0-9 ]{6}$'),
       ]),
       name: new FormControl('awdawdawdawdaw', [
         Validators.required,
@@ -26,6 +27,7 @@ export const takeFormGroupSignUp = () =>
         Validators.minLength(8),
       ]),
       role: new FormControl('student', [Validators.required]),
+      class: new FormControl('A', [Validators.required]),
     },
     { validators: MustMatchPassword() }
   );

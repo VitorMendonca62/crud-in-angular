@@ -1,13 +1,21 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
-import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FilterService } from '../../services/filter.service';
+
+type ClassFilter = "all" | "A" | "B" | "C"
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './filter.component.html',
 })
 export class FilterComponent {
-  constructor(private usersService: UsersService) {}
+  filter = new FormGroup({classFilter: new FormControl("all")});
+  constructor(private filterService: FilterService) {}
+
+  handleFilterClass() {
+    this.filterService.filterClass(this.filter.value.classFilter as ClassFilter)
+  }
 }

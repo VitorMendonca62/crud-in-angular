@@ -3,15 +3,15 @@ import {
   ChangeDetectorRef,
   Component,
 } from '@angular/core';
-import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
+import { InputFormsComponent } from '../../input-forms/input-forms.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { EmitEventService } from '../../services/eventEmit.service';
+import { EmitEventService } from '../../../services/eventEmit.service';
 import { SignUpService } from './sign-up.service';
 import { ICreateUser, IInputsSingUp } from './sign-up';
-import { RolesUser } from '../../../models/user.model';
-import { takeFormGroupSignUp } from '../../../utils/sign/formsGroups';
-import { UsersService } from '../../services/users.service';
+import { RolesUser } from '../../../../models/user.model';
+import { takeFormGroupSignUp } from '../../../../utils/sign/formsGroups';
+import { UsersService } from '../../../services/users.service';
 import { Router } from '@angular/router';
 import {
   inputName,
@@ -19,8 +19,8 @@ import {
   inputEmail,
   inputNumber,
   inputPassword,
-} from '../../../utils/sign/inputs';
-import { showAlert } from '../../../utils/general';
+} from '../../../../utils/sign/inputs';
+import { showAlert } from '../../../../utils/general';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -41,6 +41,7 @@ export class SignUpComponent {
   messageAlert!: string;
   userRole!: RolesUser;
   isSubmit: boolean = false;
+  visibleClassSelect: boolean = true;
 
   // Inputs
   inputs: IInputsSingUp = {
@@ -132,5 +133,16 @@ export class SignUpComponent {
     }
 
     this.handleSignUp();
+  }
+
+  toggleClassSelect() {
+    const select = document.querySelector(
+      '#select-signup-role'
+    ) as HTMLSelectElement;
+    if (select.value === 'student') {
+      this.visibleClassSelect = true;
+    } else {
+      this.visibleClassSelect = false;
+    }
   }
 }

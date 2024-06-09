@@ -6,23 +6,23 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IUser, RolesUser } from '../../../models/user.model';
-import { UsersService } from '../../services/users.service';
-import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
+import { IUser, RolesUser } from '../../../../models/user.model';
+import { UsersService } from '../../../services/users.service';
+import { InputFormsComponent } from '../../input-forms/input-forms.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { EmitEventService } from '../../services/eventEmit.service';
+import { EmitEventService } from '../../../services/eventEmit.service';
 import {
   inputConfirmPassword,
   inputEmail,
   inputPassword,
   inputName,
   inputNumber,
-} from '../../../utils/sign/inputs';
-import { takeFormGroupEdit } from '../../../utils/sign/formsGroups';
+} from '../../../../utils/sign/inputs';
+import { takeFormGroupEdit } from '../../../../utils/sign/formsGroups';
 import { IInputsEdit, IUserEdit } from './edit';
 import { CommonModule } from '@angular/common';
 import { EditUserService } from './edit-user.service';
-import { showAlert } from '../../../utils/general';
+import { showAlert } from '../../../../utils/general';
 
 @Component({
   selector: 'app-edit-user',

@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FilterComponent } from '../../filter/filter.component';
+import { SearchComponent } from '../../search/search.component';
 import { IUser, RolesUser } from '../../../../models/user.model';
 import { EmitEventService } from '../../../services/eventEmit.service';
-import { FilterService } from '../../../services/filter.service';
+import { SearchService } from '../../../services/search.service';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { SignUpComponent } from '../../../pages/sign-up/sign-up.component';
+import { SignUpComponent } from '../sign-up/sign-up.component';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-header',
   standalone: true,
   imports: [
-    FilterComponent,
+    SearchComponent,
     ReactiveFormsModule,
     SignUpComponent,
     CommonModule,
@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
   constructor(
     private emitEventService: EmitEventService,
-    private filterService: FilterService,
+    private searchService: SearchService,
     private authService: AuthService
   ) {}
 
@@ -36,8 +36,8 @@ export class HeaderComponent {
     return ['teacher', 'admin'].includes(this.takeRoleInStorage());
   }
 
-  async handleFilterUser() {
-    const users = await this.filterService.filterUsers();
+  handleSearchUser() {
+    this.searchService.searchUsers();
   }
 
   handleLogout() {

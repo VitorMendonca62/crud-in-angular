@@ -1,5 +1,6 @@
-<div class="container" *ngIf="students && students.length > 0">
-<h2>Estudantes</h2>
+<app-filter></app-filter>
+<div class="container" *ngIf="students">
+  <h2>Estudantes</h2>
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -12,6 +13,19 @@
             ></i>
             <i
               (click)="handleSort(true, 'number')"
+              class="bi bi-arrow-bar-down"
+            ></i>
+          </div>
+        </th>
+        <th scope="col" width="100">
+          <div class="d-flex flex-row justify-content-start align-items-center">
+            <span style="margin-right: 6px">Turma</span>
+            <i
+              (click)="handleSort(false, 'class')"
+              class="bi bi-arrow-bar-up"
+            ></i>
+            <i
+              (click)="handleSort(true, 'class')"
               class="bi bi-arrow-bar-down"
             ></i>
           </div>
@@ -63,6 +77,7 @@
     <tbody *ngFor="let student of students">
       <tr *ngIf="_definePermission('visible')">
         <td>{{ student.number }}</td>
+        <td>{{ student.class }}</td>
         <td>{{ student.name }}</td>
         <td>{{ student.email }}</td>
         <td>estudante</td>

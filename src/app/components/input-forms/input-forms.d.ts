@@ -1,7 +1,7 @@
 interface IPropsInput {
   title: string;
   type: 'text' | 'password' | 'email';
-  nameInput: 'name' | 'email' | 'password' | 'confirmPassword' | "number";
+  nameInput: 'name' | 'email' | 'password' | 'confirmPassword' | 'number';
   placeholder: string;
 }
 
@@ -14,6 +14,7 @@ interface ValidationMessages {
   minLength?: string;
   email?: string;
   mustMatch?: string;
+  pattern?: string;
 }
 
 interface ResponseValidation {

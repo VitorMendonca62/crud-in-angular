@@ -14,8 +14,8 @@
         class="container-fluid collapse navbar-collapse"
         id="navbarSupportedContent"
       >
-        <form class="d-flex" (submit)="handleFilterUser()" [formGroup]="search">
-          <app-filter></app-filter>
+        <form class="d-flex" (submit)="handleSearchUser()" [formGroup]="search">
+          <app-search></app-search>
           <button class="btn btn-primary ms-2" type="submit">Buscar</button>
         </form>
       </div>

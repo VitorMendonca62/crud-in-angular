@@ -1,5 +1,5 @@
 import { IUser } from '../../../models/user.model';
-import { IResponseWithOutRole } from '../sign-up/sign-up';
+import { IResponseWithOutRole } from '../../components/layout/sign-up/sign-up';
 
 export interface IResponseWithOurRoleWithUsers extends IResponseWithOutRole {
   users: IUser[];

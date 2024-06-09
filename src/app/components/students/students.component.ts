@@ -1,18 +1,20 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { KeysUser } from '../../pages/sign-up/sign-up';
+import { KeysUser } from '../layout/sign-up/sign-up';
 import { IUser, RolesUser } from '../../../models/user.model';
 import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../services/dashboard.service';
-import { EditUserComponent } from '../../pages/edit-user/edit-user.component';
-import { FilterEmitEventService } from '../../services/eventEmit.service';
+import { EditUserComponent } from '../layout/edit-user/edit-user.component';
+import { FilterEmitEventService, SearchEmitEventService } from '../../services/eventEmit.service';
+import { FormGroup } from '@angular/forms';
+import { FilterComponent } from '../filter/filter.component';
 
 type Actions = 'visible' | 'delete' | 'edit';
 
 @Component({
   selector: 'app-students',
   standalone: true,
-  imports: [CommonModule, EditUserComponent],
+  imports: [CommonModule, EditUserComponent, FilterComponent],
   templateUrl: './students.component.html',
 })
 export class StudentsComponent {
@@ -22,11 +24,13 @@ export class StudentsComponent {
 
   modal: 'edit-student' | 'edit-teacher' = 'edit-student';
 
+
   constructor(
     private usersService: UsersService,
     private dashboardService: DashboardService,
     private cd: ChangeDetectorRef,
-    private filterEmitEventService: FilterEmitEventService
+    private searchEmitEventService: SearchEmitEventService,
+    private filterEmitEventService: FilterEmitEventService,
   ) {}
 
   takeRoleInStorage() {
@@ -39,12 +43,17 @@ export class StudentsComponent {
 
   async ngOnInit() {
     this.students = await this.takeStudents();
-    this.filterEmitEventService.events$.subscribe((data) => {
+    this.searchEmitEventService.events$.subscribe((data) => {
       if (data.users.students) {
         this.students = data.users.students;
       }
       this.cd.detectChanges();
     });
+    this.filterEmitEventService.events$.subscribe(data => {
+      if(data.students){
+        this.students = data.students
+      }
+    })
   }
 
   handleSort(reverse: boolean, key: KeysUser) {
@@ -75,4 +84,5 @@ export class StudentsComponent {
       this.students
     );
   }
+
 }

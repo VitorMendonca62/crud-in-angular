@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { KeysUser } from '../pages/sign-up/sign-up';
+import { KeysUser } from '../components/layout/sign-up/sign-up';
 import { IUser, RolesUser } from '../../models/user.model';
 import { definePermission } from '../../utils/dashboard';
 import { UsersService } from './users.service';
@@ -18,7 +18,7 @@ export class DashboardService {
       const valueTwo = user2[key].toLowerCase();
       const comparison = valueOne.localeCompare(valueTwo);
 
-      return reverse ? -comparison : comparison;
+      return reverse ? comparison : -comparison;
     });
   }
 

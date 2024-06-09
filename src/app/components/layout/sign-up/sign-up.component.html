@@ -50,13 +50,14 @@
           ></app-input-forms>
 
           <div>
-            <label class="form-label" for="select-signup">Cargo</label>
+            <label class="form-label" for="select-signup-role">Cargo</label>
             <select
               class="form-select form-select-sm w-16"
               aria-label=".form-select-sm example"
               name="role"
-              id="select-signup"
+              id="select-signup-role"
               formControlName="role"
+              (change)="toggleClassSelect()"
             >
               <option selected value="student">Estudante</option>
               <option *ngIf="userRole === 'admin'" value="teacher">
@@ -67,26 +68,40 @@
               </option>
             </select>
           </div>
+          <div *ngIf="visibleClassSelect">
+            <label class="form-label" for="select-signup-class">Turma</label>
+            <select
+              class="form-select form-select-sm w-16"
+              aria-label=".form-select-sm example"
+              name="role"
+              id="select-signup-class"
+              formControlName="class"
+            >
+              <option selected value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+            </select>
+          </div>
           <button class="btn btn-primary my-3" type="submit">Cadastrar</button>
         </form>
       </div>
-
+    </div>
   </div>
-</div>
-<div
-  class="toast align-items-center bg-primary text-white position-absolute "
-  style="top: 2rem; right: 2rem; z-index: 9999;"
-  role="alert-signup"
-  aria-live="assertive"
-  aria-atomic="true"
->
-  <div class="d-flex">
-    <div class="toast-body">{{ messageAlert }}</div>
-    <button
-      type="button"
-      class="btn-close me-2 m-auto btn-close-white"
-      data-bs-dismiss="toast"
-      aria-label="Close"
+  <div
+    class="toast align-items-center bg-primary text-white position-absolute"
+    style="top: 2rem; right: 2rem; z-index: 9999"
+    role="alert-signup"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body">{{ messageAlert }}</div>
+      <button
+        type="button"
+        class="btn-close me-2 m-auto btn-close-white"
+        data-bs-dismiss="toast"
+        aria-label="Close"
       ></button>
+    </div>
   </div>
 </div>

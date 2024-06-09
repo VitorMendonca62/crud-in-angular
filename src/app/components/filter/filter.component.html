@@ -1,13 +1,54 @@
-<div class="input-group">
-  <label for="input-search" class="input-group-text" id="basic-addon1">
-    <i class="bi bi-search"></i>
-  </label>
-  <input
-    class="form-control me-2"
-    type="search"
-    id="input-search"
-    placeholder="Pesquisar nome..."
-    aria-label="Pesquisar nome..."
-    style="width: 15rem"
-  />
-</div>
+<form
+  class="d-flex flex-lg-row align-items-center justify-content-center"
+  style="gap: 1rem"
+  (submit)="handleFilterClass()"
+  [formGroup]="filter"
+  *ngIf="filter"
+>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="classFilter"
+      formControlName="classFilter"
+      value="all"
+      id="flexRadioDefaultAll"
+      checked
+    />
+    <label class="form-check-label" for="flexRadioDefaultAll"> Todas</label>
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="classFilter"
+      formControlName="classFilter"
+      value="A"
+      id="flexRadioDefaultA"
+    />
+    <label class="form-check-label" for="flexRadioDefaultA"> A </label>
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="classFilter"
+      formControlName="classFilter"
+      value="B"
+      id="flexRadioDefaultB"
+    />
+    <label class="form-check-label" for="flexRadioDefaultB"> B </label>
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="classFilter"
+      formControlName="classFilter"
+      value="C"
+      id="flexRadioDefaultC"
+    />
+    <label class="form-check-label" for="flexRadioDefaultC"> C </label>
+  </div>
+  <button class="btn btn-primary ms-2" type="submit">Filtrar</button>
+</form>

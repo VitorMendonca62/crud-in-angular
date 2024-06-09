@@ -4,16 +4,16 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { KeysUser } from '../../pages/sign-up/sign-up';
+import { KeysUser } from '../layout/sign-up/sign-up';
 import { IUser, RolesUser } from '../../../models/user.model';
 import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../services/dashboard.service';
-import { EditUserComponent } from '../../pages/edit-user/edit-user.component';
-import { FilterService } from '../../services/filter.service';
+import { EditUserComponent } from '../layout/edit-user/edit-user.component';
+import { SearchService } from '../../services/search.service';
 import {
   EmitEventService,
-  FilterEmitEventService,
+  SearchEmitEventService,
 } from '../../services/eventEmit.service';
 
 type Actions = 'visible' | 'delete' | 'edit';
@@ -35,7 +35,7 @@ export class TeachersComponent {
     private usersService: UsersService,
     private dashboardService: DashboardService,
     private cd: ChangeDetectorRef,
-    private filterEmitEventService: FilterEmitEventService
+    private searchEmitEventService: SearchEmitEventService
   ) {}
 
   takeRoleInStorage() {
@@ -48,7 +48,7 @@ export class TeachersComponent {
 
   async ngOnInit() {
     this.teachers = await this.takeTeachers();
-    this.filterEmitEventService.events$.subscribe((data) => {
+    this.searchEmitEventService.events$.subscribe((data) => {
       if (data.users.teachers) {
         this.teachers = data.users.teachers;
       }

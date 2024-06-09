@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../../environments/environment.development';
 import { v4 } from 'uuid';
 import bcrypt from 'bcryptjs';
-import { IUser, RolesUser } from '../../../models/user.model';
+import { IUser, RolesUser } from '../../../../models/user.model';
 import { ICreateUser, IResponseWithOutRole } from './sign-up';
-import { UsersService } from '../../services/users.service';
-import { PermissionsService } from '../../services/permissions.service';
+import { UsersService } from '../../../services/users.service';
+import { PermissionsService } from '../../../services/permissions.service';
 
 @Injectable({
   providedIn: 'root',
@@ -57,7 +57,14 @@ export class SignUpService {
     newUser: ICreateUser,
     userRole: RolesUser
   ): Promise<IResponseWithOutRole> {
-    const { email: _email, name, password: _password, role, number } = newUser;
+    const {
+      email: _email,
+      name,
+      password: _password,
+      role,
+      number,
+      class: classUser,
+    } = newUser;
     const email = _email.toLowerCase();
     const isInDatabase = await this.verifyIsInDatabase(email, number);
 
@@ -77,16 +84,30 @@ export class SignUpService {
 
     if (canModificateUser) {
       const id = v4();
-      const observable = this.http.post<Response>(url, {
-        id,
-        number,
-        name,
-        email,
-        role,
-        password,
-      });
-
-      observable.subscribe();
+      if (role === 'student') {
+        this.http
+          .post<Response>(url, {
+            id,
+            number,
+            name,
+            email,
+            role,
+            password,
+            class: classUser,
+          })
+          .subscribe();
+      } else {
+        this.http
+          .post<Response>(url, {
+            id,
+            number,
+            name,
+            email,
+            role,
+            password,
+          })
+          .subscribe();
+      }
 
       return {
         error: false,

@@ -5,7 +5,7 @@ import { forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IResponseWithOurRoleWithUsers } from '../pages/dashboard/dashboard';
 import { IData } from './users';
-import { FilterEmitEventService } from './eventEmit.service';
+import { SearchEmitEventService } from './eventEmit.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ import { FilterEmitEventService } from './eventEmit.service';
 export class UsersService {
   constructor(
     private http: HttpClient,
-    private filterEmitEventService: FilterEmitEventService
+    private searchEmitEventService: SearchEmitEventService
   ) {}
 
   joinAllUsers(usersInRoles: IUser[][]): IUser[] {
@@ -101,7 +101,6 @@ export class UsersService {
   }
 
   async filterByName(name: string) {
-    const listRoles: RolesUser[] = ['student', 'teacher', 'admin'];
     const data: IData = { students: [], admins: [], teachers: [] };
 
     const admins = await this.findUsersInRole('admin');
@@ -118,6 +117,17 @@ export class UsersService {
     data['students'] = students.filter((user) =>
       user.name.toLowerCase().includes(name)
     );
+
+    return data;
+  }
+  async filterByNameWithClass(name: string, users: IUser[]) {
+    const data: IData = { students: [], admins: [], teachers: [] };
+
+    users.forEach((user) => {
+      if (user.name.toLowerCase().includes(name)) {
+        data[`${user.role}s`].push(user);
+      }
+    });
 
     return data;
   }

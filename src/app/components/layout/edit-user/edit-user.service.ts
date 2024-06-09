@@ -1,11 +1,11 @@
 import { Injectable, Input } from '@angular/core';
-import { RolesUser } from '../../../models/user.model';
+import { RolesUser } from '../../../../models/user.model';
 import { IUserEdit } from './edit';
 import { SignUpService } from '../sign-up/sign-up.service';
-import { environment } from '../../../environments/environment.development';
-import { PermissionsService } from '../../services/permissions.service';
+import { environment } from '../../../../environments/environment.development';
+import { PermissionsService } from '../../../services/permissions.service';
 import { HttpClient } from '@angular/common/http';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../../services/users.service';
 
 @Injectable({
   providedIn: 'root',
