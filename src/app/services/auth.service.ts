@@ -34,4 +34,12 @@ export class AuthService {
     localStorage.setItem('expiresIn', `${dateNow}`);
     localStorage.setItem('role', role);
   }
+
+  logoutUser() {
+    localStorage.removeItem('authorization');
+    localStorage.removeItem('expiresIn');
+    localStorage.removeItem('role');
+
+    this.router.navigate(['login']);
+  }
 }

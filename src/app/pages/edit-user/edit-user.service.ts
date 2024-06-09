@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { RolesUser } from '../../../models/user.model';
 import { IUserEdit } from './edit';
 import { SignUpService } from '../sign-up/sign-up.service';
@@ -52,7 +52,6 @@ export class EditUserService extends SignUpService {
       role,
       userRole
     );
-
 
     if (canModificateUser) {
       const observable = this.http.patch<Response>(url, {

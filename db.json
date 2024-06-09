@@ -1,31 +1,40 @@
 {
   "students": [
     {
-      "id": "3577532f-88df-4f97-9af3-8c38c23bca73",
-      "number": "111111",
+      "id": "ce9ce30b-726e-453d-80fb-2c5e05awdwad",
+      "number": "111112",
       "name": "awdawdawdawdaw",
-      "email": "sla123w@gmail.com",
+      "email": "111112@gmail.com",
       "role": "student",
-      "password": "$2a$10$1a0XQKl9cENOM9ilT33IDO24s3U9OMxFlbPzqF.51kme9tKcoH/Fy"
+      "password": "$2a$10$wowtEEEVABUTKJK7vsguheSql0y0xENt/42YIT1pL/QvA47Tg4bjG"
     },
     {
-      "id": "515b1d65-445f-4cfa-881e-1f2142b45bd3",
-      "number": "121242",
-      "name": "adwadawd",
-      "email": "12wadwdwad@gmail.com",
+      "id": "ce9ce30b-726e-453d-80fb-adwdawdwad",
+      "number": "111113",
+      "name": "awdawdawdawdaw",
+      "email": "111113@gmail.com",
       "role": "student",
-      "password": "$2a$10$66A/aTXumgOxVUyLlvhgQOJuucvrB0UbrSIqBmBMzu.wF273GAYti"
+      "password": "$2a$10$wowtEEEVABUTKJK7vsguheSql0y0xENt/42YIT1pL/QvA47Tg4bjG"
     },
     {
-      "id": "8031252c-ec78-4369-bc48-f1d1fa766352",
-      "number": "142412",
-      "name": "vitao",
-      "email": "sla123aaaaaaaaaaa@gmail.com",
+      "id": "ce9ce30b-726e-453d-80fb-dawdwadwad",
+      "number": "111114",
+      "name": "awdawdawdawdaw",
+      "email": "111114@gmail.com",
       "role": "student",
-      "password": "$2a$10$2GvsMGS.845wk47YH20tq.37d31.3vl4OLm7s5tzrtpoL1U256tl2"
+      "password": "$2a$10$wowtEEEVABUTKJK7vsguheSql0y0xENt/42YIT1pL/QvA47Tg4bjG"
     }
   ],
-  "teachers": [],
+  "teachers": [
+    {
+      "id": "66230d66-6b43-4058-a2dc-777640e39339",
+      "number": "131313",
+      "name": "KKKKKKKKKKK@2",
+      "email": "bbbbbb@bbb.com",
+      "role": "teacher",
+      "password": "$2a$10$PlzqiVca7Aonp7w/xprMy.7JS4Zf8LEB.TbGS/d9ETu79/bdDDpma"
+    }
+  ],
   "admins": [
     {
       "id": "e0271ffd-ec22-462b-b601-f78d710599c1",

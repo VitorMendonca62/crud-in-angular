@@ -40,7 +40,7 @@ export class SignUpService {
     email: string,
     number: string
   ): Promise<boolean> {
-    const users = await this.usersService.findAllUsers();
+    const users = await this.usersService.findAllUsers("all");
     let i = 0;
     let running = true;
 

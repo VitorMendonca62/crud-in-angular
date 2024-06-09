@@ -11,37 +11,51 @@ import { IResponseWithOurRoleWithUsers } from '../pages/dashboard/dashboard';
 export class UsersService {
   constructor(private http: HttpClient) {}
 
-  users: IUser[] = [];
-
-  joinAllUsers(usersInRoles: IUser[][]): void {
-    this.users = [];
+  joinAllUsers(usersInRoles: IUser[][]): IUser[] {
+    const users: IUser[] = [];
     usersInRoles.forEach((usersInRole: IUser[]) =>
-      usersInRole.forEach((user: IUser) => this.users.push(user))
+      usersInRole.forEach((user: IUser) => users.push(user))
     );
+    return users;
   }
 
-  findAllUsers(): Promise<IUser[]> {
+  findAllUsers(role: RolesUser | 'all'): Promise<IUser[]> {
     const listRoles: RolesUser[] = ['student', 'teacher', 'admin'];
 
-    const observables = listRoles.map((role: RolesUser) => {
-      const url = `${environment.hostApiUrl}/${role}s`;
-      return this.http.get<IUser[]>(url);
-    });
+    if (role === 'all') {
+      const observables = listRoles.map((_role: RolesUser) => {
+        const url = `${environment.hostApiUrl}/${_role}s`;
+        return this.http.get<IUser[]>(url);
+      });
 
-    const observablesForked = forkJoin(observables);
+      const observablesForked = forkJoin(observables);
+
+      return new Promise((resolve, reject) => {
+        observablesForked.subscribe((usersInRoles) => {
+          return resolve(this.joinAllUsers(usersInRoles));
+        });
+      });
+    }
+
+    const url = `${environment.hostApiUrl}/${role}s`;
 
     return new Promise((resolve, reject) => {
-      observablesForked.subscribe((usersInRoles) => {
-        this.joinAllUsers(usersInRoles);
-        return resolve(this.users);
+      this.http.get<IUser[]>(url).subscribe((users) => {
+        return resolve(users);
       });
     });
   }
 
-  async findUser(email: string): Promise<IUser | undefined> {
-    email = email.toLowerCase();
+  async findUser(
+    email: string,
+    users: IUser[] | 'all'
+  ): Promise<IUser | undefined> {
+    email = email?.toLowerCase();
 
-    const users = await this.findAllUsers();
+    if (users === 'all') {
+      users = await this.findAllUsers('all');
+    }
+
     let user: IUser | undefined;
 
     let i = 0;
@@ -57,36 +71,37 @@ export class UsersService {
 
   async deleteUser(
     email: string,
-    role: RolesUser
+    role: RolesUser,
+    users: IUser[]
   ): Promise<IResponseWithOurRoleWithUsers> {
-    const user = await this.findUser(email);
+    const user = await this.findUser(email, users);
+    console.log(user);
     if (user) {
-      const indexUser = this.users.indexOf(user);
-      this.users.splice(indexUser, 1);
+      const indexUser = users.indexOf(user);
+      users.splice(indexUser, 1);
 
       const url = `${environment.hostApiUrl}/${role}s/${user.id}`;
       this.http.delete(url).subscribe();
       return {
         error: false,
         msg: 'Usuário deletado com sucesso',
-        users: this.users,
+        users,
       };
     }
     return {
       error: true,
       msg: 'Usuário não existe',
-      users: this.users,
+      users,
     };
   }
 
   async filterByName(name: string) {
-    const users = await this.findAllUsers();
+    const users = await this.findAllUsers('all');
 
     const usersFiltered = users.filter((user) =>
       user.name.toLowerCase().includes(name)
     );
 
-    this.users = usersFiltered;
     return usersFiltered;
   }
 }

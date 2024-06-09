@@ -73,7 +73,6 @@ export class SignUpComponent {
     // this.permissionsService.permissionAcessInSignUp();
     this.defineFormGroupSignUp();
     this.takeRoleInStorage();
-    this.usersService.findAllUsers();
   }
 
   toDashboard() {
@@ -92,12 +91,13 @@ export class SignUpComponent {
   }
 
   handleAfterSignUp() {
-    const button = document.querySelector(
+    const signUpElement = document.querySelector('app-signup');
+    const button = signUpElement?.querySelector(
       'button[type=submit]'
     ) as HTMLButtonElement;
 
     button.disabled = true;
-    showAlert();
+    showAlert('signup');
 
     setTimeout(() => {
       if (!this.isInDatabase) {
@@ -105,7 +105,7 @@ export class SignUpComponent {
       }
 
       button.disabled = false;
-      showAlert();
+      showAlert('signup');
     }, 3500);
   }
 

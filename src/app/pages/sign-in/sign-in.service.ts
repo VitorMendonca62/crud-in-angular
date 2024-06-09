@@ -9,9 +9,8 @@ import { UsersService } from '../../services/users.service';
   providedIn: 'root',
 })
 export class SignInService {
-  constructor(private http: HttpClient, private usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
   private user: IUser | undefined;
-  private email!: string;
 
   async loginUser(inputUser: ILoginUser): Promise<IResponse> {
     const { email, password } = inputUser;
@@ -28,7 +27,7 @@ export class SignInService {
       return bcrypt.compareSync(password, (this.user as IUser).password);
     };
 
-    this.user = await this.usersService.findUser(email);
+    this.user = await this.usersService.findUser(email, "all");
 
     if (this.user == undefined) {
       return errorEmailOrPassword();

@@ -25,22 +25,4 @@ export const routes: Routes = [
     component: SignInComponent,
     canActivate: [noAuthGuard],
   },
-  {
-    path: '',
-    component: AppComponent,
-
-    children: [
-      {
-        path: 'cadastro',
-        pathMatch: 'full',
-        component: SignUpComponent,
-        canActivate: [signUpGuard],
-      },
-      {
-        path: 'edito/:email',
-        component: EditUserComponent,
-        canActivate: [signUpGuard],
-      },
-    ],
-  },
 ];

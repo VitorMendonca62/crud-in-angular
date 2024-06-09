@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="https://www2.recife.pe.gov.br/">
           <img
-            src="imgs/logo-recife.png"
+            src="https://statics.recife.pe.gov.br/images/dynamics/logo_gestao_pcr_alt_horizontal.png?w=267"
             alt="Logo Prefeitura do Recife"
             class="d-inline-block align-text-top"
           />
@@ -24,10 +24,11 @@
         class="btn btn-primary"
         data-bs-toggle="modal"
         data-bs-target="#signupmodal"
-      >
+        *ngIf="permissionSingUp()"
+        >
         Cadastrar
       </button>
-      <button class="btn btn-primary ms-2 float-right" type="button">
+      <button class="btn btn-primary ms-2 float-right" type="button" (click)="handleLogout()">
         Sair
       </button>
     </div>

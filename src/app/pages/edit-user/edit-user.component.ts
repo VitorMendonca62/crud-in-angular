@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser, RolesUser } from '../../../models/user.model';
 import { UsersService } from '../../services/users.service';
@@ -25,17 +31,19 @@ import { showAlert } from '../../../utils/general';
   templateUrl: './edit-user.component.html',
 })
 export class EditUserComponent {
-  email!: string;
-  user!: IUser | undefined;
+  @Input() email!: string;
+  @Input() users!: IUser[];
   messageAlert!: string;
+
+  user!: IUser | undefined;
   isInDatabase: boolean = false;
 
   constructor(
-    private router: Router,
+    // private router: Router,
+    // private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
     private usersService: UsersService,
     private emitEventService: EmitEventService,
-    private cd: ChangeDetectorRef,
     private editUserService: EditUserService
   ) {}
 
@@ -58,28 +66,18 @@ export class EditUserComponent {
   }
 
   async takeUser() {
-    console.log(this.email);
-    return await this.usersService.findUser(this.email);
+    return await this.usersService.findUser(this.email, this.users);
   }
 
-  toDashboard() {
-    this.router.navigate(['dashboard']);
-  }
-
-  async ngOnInit() {
-    this.takeEmail();
+  async ngOnChanges(changes: SimpleChanges) {
     this.user = await this.takeUser();
-    this.defineFormGroupEdit();
-
-    if (this.user == undefined || this.user.role === 'admin') {
-      this.router.navigate(['dashboard']);
-    }
+    this.edit = this.defineFormGroupEdit();
   }
 
   isSubmit: boolean = false;
   public edit!: FormGroup;
 
-  defineFormGroupEdit(): void {
+  defineFormGroupEdit(): FormGroup {
     if (this.user) {
       this.edit = takeFormGroupEdit(
         this.email,
@@ -87,8 +85,10 @@ export class EditUserComponent {
         this.user?.name
       );
     }
-    this.cd.detectChanges();
+    return this.edit;
   }
+
+  showAlert() {}
 
   async handleEdit(): Promise<void> {
     this.isSubmit = true;
@@ -104,25 +104,24 @@ export class EditUserComponent {
       this.takeRole()
     );
 
-    this.messageAlert = (await response).msg;
     this.isInDatabase = (await response).error;
+    this.messageAlert = (await response).msg;
 
-    showAlert();
-    this.cd.detectChanges();
-
-    const button = document.querySelector(
+    const editUserElement = document.querySelector('app-edit-user');
+    const button = editUserElement?.querySelector(
       'button[type=submit]'
     ) as HTMLButtonElement;
 
     button.disabled = true;
+    showAlert('edit');
 
     setTimeout(() => {
       if (!this.isInDatabase) {
-        this.router.navigate(['dashboard']);
+        location.reload();
       }
 
-      showAlert();
       button.disabled = false;
+      showAlert('edit');
     }, 3500);
   }
 
