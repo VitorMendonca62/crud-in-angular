@@ -1,79 +1,75 @@
 <div
-  class="bg-dark d-flex align-items-center justify-content-center"
-  style="height: 100vh; width: 100%"
+  class="modal fade"
+  id="signupmodal"
+  tabindex="-1"
+  aria-labelledby="signupmodal"
+  aria-hidden="true"
 >
-  <form
-    class="bg-light px-5 py-3 position-relative"
-    [formGroup]="signup"
-    (submit)="userSignUp()"
-    *ngIf="signup"
-  >
-    <button
-      type="button"
-      class="btn-close position-absolute"
-      style="right: 1rem; top: 1.5rem"
-      aria-label="Close"
-      (click)="toDashboard()"
-    ></button>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="signupmodal">Cadastro</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="px-5 py-3 position-relative"
+          [formGroup]="signup"
+          (submit)="userSignUp()"
+          *ngIf="signup"
+        >
+          <app-input-forms
+            [props]="inputs.inputNumber"
+            [formGroup]="signup"
+            [isSubmit]="isSubmit"
+          ></app-input-forms>
+          <app-input-forms
+            [props]="inputs.inputName"
+            [formGroup]="signup"
+            [isSubmit]="isSubmit"
+          ></app-input-forms>
+          <app-input-forms
+            [props]="inputs.inputEmail"
+            [formGroup]="signup"
+            [isSubmit]="isSubmit"
+          ></app-input-forms>
+          <app-input-forms
+            [props]="inputs.inputPassword"
+            [formGroup]="signup"
+            [isSubmit]="isSubmit"
+          ></app-input-forms>
+          <app-input-forms
+            [props]="inputs.inputConfirmPassword"
+            [formGroup]="signup"
+            [isSubmit]="isSubmit"
+          ></app-input-forms>
 
-    <h2>Cadastro</h2>
-    <app-input-forms
-      [props]="inputs.inputNumber"
-      [formGroup]="signup"
-      [isSubmit]="isSubmit"
-    ></app-input-forms>
-    <app-input-forms
-      [props]="inputs.inputName"
-      [formGroup]="signup"
-      [isSubmit]="isSubmit"
-    ></app-input-forms>
-    <app-input-forms
-      [props]="inputs.inputEmail"
-      [formGroup]="signup"
-      [isSubmit]="isSubmit"
-    ></app-input-forms>
-    <app-input-forms
-      [props]="inputs.inputPassword"
-      [formGroup]="signup"
-      [isSubmit]="isSubmit"
-    ></app-input-forms>
-    <app-input-forms
-      [props]="inputs.inputConfirmPassword"
-      [formGroup]="signup"
-      [isSubmit]="isSubmit"
-    ></app-input-forms>
+          <div>
+            <label class="form-label" for="select-signup">Cargo</label>
+            <select
+              class="form-select form-select-sm w-16"
+              aria-label=".form-select-sm example"
+              name="role"
+              id="select-signup"
+              formControlName="role"
+            >
+              <option selected value="student">Estudante</option>
+              <option *ngIf="userRole === 'admin'" value="teacher">
+                Professor
+              </option>
+              <option *ngIf="userRole === 'admin'" value="admin">
+                Administrador
+              </option>
+            </select>
+          </div>
+          <button class="btn btn-primary my-3" type="submit">Cadastrar</button>
+        </form>
+      </div>
 
-    <div>
-      <label class="form-label" for="select-signup">Cargo</label>
-      <select
-        class="form-select form-select-sm w-16"
-        aria-label=".form-select-sm example"
-        name="role"
-        id="select-signup"
-        formControlName="role"
-      >
-        <option selected value="student">Estudante</option>
-        <option *ngIf="userRole === 'admin'" value="teacher">Professor</option>
-        <option *ngIf="userRole === 'admin'" value="admin">Administrador</option>
-      </select>
-    </div>
-    <button class="btn btn-primary my-3" type="submit">Cadastrar</button>
-  </form>
-</div>
-<div
-  class="toast fade align-items-center text-white bg-warning text-white border-0 position-absolute"
-  style="top: 5rem; right: 2rem"
-  role="alert"
-  aria-live="assertive"
-  aria-atomic="true"
->
-  <div class="d-flex">
-    <div class="toast-body">{{ messageAlert }}</div>
-    <button
-      type="button"
-      class="btn-close btn-close-white me-2 m-auto"
-      data-bs-dismiss="toast"
-      aria-label="Close"
-    ></button>
   </div>
 </div>

@@ -8,8 +8,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { SubmitEventService } from '../../services/submitEventEmit.service';
-
+import { EmitEventService } from '../../services/eventEmit.service';
+import { responseValidation } from '../../../utils/input';
 @Component({
   selector: 'app-input-forms',
   standalone: true,
@@ -17,45 +17,22 @@ import { SubmitEventService } from '../../services/submitEventEmit.service';
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './input-forms.component.html',
 })
-export class InputFormsComponent implements OnChanges {
+export class InputFormsComponent {
   @Input() props!: IPropsInput;
   @Input() formGroup!: FormGroup;
   @Input() isSubmit: boolean = false;
 
   constructor(
-    private submitEventService: SubmitEventService,
+    private emitEventService: EmitEventService,
     private cd: ChangeDetectorRef
   ) {}
 
   message: string = '';
 
-  responseValidation = {
-    number: {
-      required: 'Matrícula é obrigatória',
-      minlength: 'Matrícula não tem 6 (seis) caracteres',
-      maxlength: 'Matrícula não tem 6 (seis) caracteres',
-    },
-    name: {
-      required: 'Nome é obrigatório',
-      minlength: 'Nome curto demais',
-    },
-    email: {
-      required: 'Email é obrigatório',
-      email: 'Tem que ser um email válido',
-    },
-    password: {
-      required: 'Senha é obrigatória',
-      minlength: 'Senha muita curta',
-    },
-    confirmPassword: {
-      required: 'Confirmação de senha é obrigatória',
-      mustMatch: 'As senhas não são iguais',
-      minlength: 'Confirmação de senha muita curta',
-    },
-  };
+  responseValidation = responseValidation;
 
   ngOnInit() {
-    this.submitEventService.events$.subscribe((data) => {
+    this.emitEventService.events$.subscribe((data) => {
       this.formGroup = data.formGroup;
       this.handlErrors();
     });
@@ -81,15 +58,12 @@ export class InputFormsComponent implements OnChanges {
       inputElement?.classList.add('border-danger');
       inputElement?.classList.remove('border-secondary');
       return;
-      }
+    }
 
-      inputElement?.classList.remove('border-danger');
-      inputElement?.classList.add('border-secondary');
-      this.message = '';
+    inputElement?.classList.remove('border-danger');
+    inputElement?.classList.add('border-secondary');
+    this.message = '';
     this.cd.detectChanges();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.handlErrors();
-  }
 }

@@ -1,11 +1,55 @@
-<table class="table table-hover">
+<table class="table table-bordered table-hover container">
   <thead>
     <tr>
-      <th scope="col">Matrícula</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Email</th>
-      <th scope="col">Cargo</th>
-      <th scope="col">Ações</th>
+      <th scope="col" width="130">
+        <div class="d-flex flex-row justify-content-start align-items-center">
+          <span style="margin-right: 6px">Matrícula</span>
+          <i
+            (click)="handleSort(false, 'number')"
+            class="bi bi-arrow-bar-up"
+          ></i>
+          <i
+            (click)="handleSort(true, 'number')"
+            class="bi bi-arrow-bar-down"
+          ></i>
+        </div>
+      </th>
+      <th scope="col" class="" width="350">
+        <div class="d-flex flex-row">
+          <span style="margin-right: 6px">Nome</span>
+          <i (click)="handleSort(false, 'name')" class="bi bi-arrow-bar-up"></i>
+          <i
+            (click)="handleSort(true, 'name')"
+            class="bi bi-arrow-bar-down"
+          ></i>
+        </div>
+      </th>
+      <th scope="col" class="" width="350">
+        <div class="d-flex flex-row">
+          <span style="margin-right: 6px">Email</span>
+          <i
+            (click)="handleSort(false, 'email')"
+            class="bi bi-arrow-bar-up"
+          ></i>
+          <i
+            (click)="handleSort(true, 'email')"
+            class="bi bi-arrow-bar-down"
+          ></i>
+        </div>
+      </th>
+      <th scope="col" class="" width="125">
+        <div class="d-flex flex-row">
+          <span style="margin-right: 6px">Cargo</span>
+          <i (click)="handleSort(false, 'role')" class="bi bi-arrow-bar-up"></i>
+          <i
+            (click)="handleSort(true, 'role')"
+            class="bi bi-arrow-bar-down"
+          ></i>
+        </div>
+      </th>
+      <th scope="col" class="" width="75">
+        <span style="margin-right: 6px">Ações</span>
+      </th>
     </tr>
   </thead>
   <tbody *ngFor="let user of users">
@@ -15,22 +59,20 @@
       <td>{{ user.email }}</td>
       <td>{{ formatingRole(user.role) }}</td>
       <td>
-        <button
+        <i
+          class="bi bi-pencil icon"
           *ngIf="_definePermission(user.role, 'edit', inUserRole)"
-          (click)="handleEdit(user.email)"
-        >
-          Editar
-        </button>
-        <button
+          data-bs-toggle="modal"
+          data-bs-target="#signinmodal"
+        ></i>
+
+        <i
+          class="bi bi-trash ms-3 icon"
           (click)="handleDeleteUser(user.email, user.role)"
           *ngIf="_definePermission(user.role, 'delete', inUserRole)"
-        >
-          Deletar
-        </button>
+        ></i>
       </td>
     </tr>
   </tbody>
 </table>
-
-<app-filter (filteredUsers)="onUsersFiltered($event)"></app-filter>
-<button (click)="logoutUser()">SAIR</button>
+<app-edit-user></app-edit-user>

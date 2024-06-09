@@ -1,5 +1,5 @@
 import { IUser } from '../../../models/user.model';
-export type KeysUser = 'email' | 'role' | 'number';
+export type KeysUser = 'email' | 'role' | 'number' | "name";
 
 export type _ICreateUser = Omit<IUser, 'id'>;
 

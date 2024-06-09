@@ -1,4 +1,38 @@
-<header class="container d-flex justify-content-between">
-  <h1>SEDUC</h1>
-  <span> <i class="bi bi-box-arrow-right"></i> <a href="#">Sair</a> </span>
+<header class="mb-5">
+  <nav class="navbar navbar-expand-lg navbar-light container">
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="https://www2.recife.pe.gov.br/">
+          <img
+            src="imgs/logo-recife.png"
+            alt="Logo Prefeitura do Recife"
+            class="d-inline-block align-text-top"
+          />
+        </a>
+      </div>
+      <div
+        class="container-fluid collapse navbar-collapse"
+        id="navbarSupportedContent"
+      >
+        <form class="d-flex" (submit)="handleFilterUser()" [formGroup]="search">
+          <app-filter></app-filter>
+          <button class="btn btn-primary ms-2" type="submit">Buscar</button>
+        </form>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#signupmodal"
+      >
+        Cadastrar
+      </button>
+      <button class="btn btn-primary ms-2 float-right" type="button">
+        Sair
+      </button>
+    </div>
+  </nav>
 </header>
+
+<app-signup></app-signup>
+

@@ -6,7 +6,7 @@ import {
 import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SubmitEventService } from '../../services/submitEventEmit.service';
+import { EmitEventService } from '../../services/eventEmit.service';
 import { SignUpService } from './sign-up.service';
 import { ICreateUser, IInputsSingUp } from './sign-up';
 import { RolesUser } from '../../../models/user.model';
@@ -20,7 +20,6 @@ import {
   inputNumber,
   inputPassword,
 } from '../../../utils/sign/inputs';
-import { PermissionsService } from '../../services/permissions.service';
 import { showAlert } from '../../../utils/general';
 @Component({
   selector: 'app-signup',
@@ -53,11 +52,10 @@ export class SignUpComponent {
   };
 
   constructor(
-    private submitEventService: SubmitEventService,
+    private emitEventService: EmitEventService,
     private signUpService: SignUpService,
     private router: Router,
     private cd: ChangeDetectorRef,
-    // private permissionsService: PermissionsService,
     private usersService: UsersService
   ) {}
 
@@ -129,7 +127,7 @@ export class SignUpComponent {
     this.isSubmit = true;
 
     if (!this.signup.valid) {
-      this.submitEventService.emitEvent({ formGroup: this.signup });
+      this.emitEventService.emitEvent({ formGroup: this.signup });
       return;
     }
 
