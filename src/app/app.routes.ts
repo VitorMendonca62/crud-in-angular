@@ -1,11 +1,8 @@
 import { Routes } from '@angular/router';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { SignUpComponent } from './components/layout/sign-up/sign-up.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AppComponent } from './app.component';
-import { authGuard, noAuthGuard, signUpGuard } from './auth.guard';
-import { EditUserComponent } from './components/layout/edit-user/edit-user.component';
-
+import { authGuard, noAuthGuard } from './auth.guard';
+import { Error404Component } from './pages/404/404.component';
 export const routes: Routes = [
   {
     path: '',
@@ -23,6 +20,12 @@ export const routes: Routes = [
     path: 'login',
     pathMatch: 'full',
     component: SignInComponent,
+    canActivate: [noAuthGuard],
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: Error404Component,
     canActivate: [noAuthGuard],
   },
 ];
