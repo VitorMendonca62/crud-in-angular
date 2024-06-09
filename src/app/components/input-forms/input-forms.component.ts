@@ -8,7 +8,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GlobalEventService } from '../../services/eventEmit.service';
+import { SubmitEventService } from '../../services/submitEventEmit.service';
 
 @Component({
   selector: 'app-input-forms',
@@ -23,7 +23,7 @@ export class InputFormsComponent implements OnChanges {
   @Input() isSubmit: boolean = false;
 
   constructor(
-    private globalEventService: GlobalEventService,
+    private submitEventService: SubmitEventService,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -55,7 +55,7 @@ export class InputFormsComponent implements OnChanges {
   };
 
   ngOnInit() {
-    this.globalEventService.events$.subscribe((data) => {
+    this.submitEventService.events$.subscribe((data) => {
       this.formGroup = data.formGroup;
       this.handlErrors();
     });

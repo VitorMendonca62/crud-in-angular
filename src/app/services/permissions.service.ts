@@ -55,7 +55,7 @@ export class PermissionsService {
       this.router.navigate(['/dashboard']);
       return false;
     }
-    const user = await this.usersService.foundUser(emailParams);
+    const user = await this.usersService.findUser(emailParams);
     const role = localStorage.getItem('role') as RolesUser;
 
     if (user === undefined) return false;

@@ -6,7 +6,7 @@ import {
 import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { GlobalEventService } from '../../services/eventEmit.service';
+import { SubmitEventService } from '../../services/submitEventEmit.service';
 import { SignUpService } from './sign-up.service';
 import { ICreateUser, IInputsSingUp } from './sign-up';
 import { RolesUser } from '../../../models/user.model';
@@ -53,7 +53,7 @@ export class SignUpComponent {
   };
 
   constructor(
-    private globalEventService: GlobalEventService,
+    private submitEventService: SubmitEventService,
     private signUpService: SignUpService,
     private router: Router,
     private cd: ChangeDetectorRef,
@@ -75,7 +75,7 @@ export class SignUpComponent {
     // this.permissionsService.permissionAcessInSignUp();
     this.defineFormGroupSignUp();
     this.takeRoleInStorage();
-    this.usersService.foundAllUsers();
+    this.usersService.findAllUsers();
   }
 
   toDashboard() {
@@ -129,7 +129,7 @@ export class SignUpComponent {
     this.isSubmit = true;
 
     if (!this.signup.valid) {
-      this.globalEventService.emitEvent({ formGroup: this.signup });
+      this.submitEventService.emitEvent({ formGroup: this.signup });
       return;
     }
 

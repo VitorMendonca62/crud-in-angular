@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GlobalEventService } from '../../services/eventEmit.service';
+import { SubmitEventService } from '../../services/submitEventEmit.service';
 import { IInputsSingIn, ILoginUser, IResponse } from './sign-in';
 import { SignInService } from './sign-in.service';
 import {
@@ -38,7 +38,7 @@ export class SignInComponent {
 
   // Inputs
   constructor(
-    private globalEventService: GlobalEventService,
+    private submitEventService: SubmitEventService,
     private signInService: SignInService,
     private cd: ChangeDetectorRef,
     private authService: AuthService,
@@ -89,7 +89,7 @@ export class SignInComponent {
     this.isSubmit = true;
 
     if (!this.signin.valid) {
-      this.globalEventService.emitEvent({ formGroup: this.signin });
+      this.submitEventService.emitEvent({ formGroup: this.signin });
       return;
     }
     this.handleLogin();

@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class GlobalEventService {
+export class SubmitEventService {
   private eventSubject = new Subject<any>();
 
   emitEvent(data: any) {

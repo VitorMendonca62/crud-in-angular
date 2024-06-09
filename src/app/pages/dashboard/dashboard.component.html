@@ -9,21 +9,21 @@
     </tr>
   </thead>
   <tbody *ngFor="let user of users">
-    <tr *ngIf="definePermission(user.role, 'visible')">
+    <tr *ngIf="_definePermission(user.role, 'visible', inUserRole)">
       <td>{{ user.number }}</td>
       <td>{{ user.name }}</td>
       <td>{{ user.email }}</td>
       <td>{{ formatingRole(user.role) }}</td>
       <td>
         <button
-          *ngIf="definePermission(user.role, 'edit')"
+          *ngIf="_definePermission(user.role, 'edit', inUserRole)"
           (click)="handleEdit(user.email)"
         >
           Editar
         </button>
         <button
           (click)="handleDeleteUser(user.email, user.role)"
-          *ngIf="definePermission(user.role, 'delete')"
+          *ngIf="_definePermission(user.role, 'delete', inUserRole)"
         >
           Deletar
         </button>
@@ -31,3 +31,6 @@
     </tr>
   </tbody>
 </table>
+
+<app-filter (filteredUsers)="onUsersFiltered($event)"></app-filter>
+<button (click)="logoutUser()">SAIR</button>

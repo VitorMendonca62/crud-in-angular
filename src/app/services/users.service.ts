@@ -20,7 +20,7 @@ export class UsersService {
     );
   }
 
-  foundAllUsers(): Promise<IUser[]> {
+  findAllUsers(): Promise<IUser[]> {
     const listRoles: RolesUser[] = ['student', 'teacher', 'admin'];
 
     const observables = listRoles.map((role: RolesUser) => {
@@ -38,10 +38,10 @@ export class UsersService {
     });
   }
 
-  async foundUser(email: string): Promise<IUser | undefined> {
+  async findUser(email: string): Promise<IUser | undefined> {
     email = email.toLowerCase();
 
-    const users = await this.foundAllUsers();
+    const users = await this.findAllUsers();
     let user: IUser | undefined;
 
     let i = 0;
@@ -59,7 +59,7 @@ export class UsersService {
     email: string,
     role: RolesUser
   ): Promise<IResponseWithOurRoleWithUsers> {
-    const user = await this.foundUser(email);
+    const user = await this.findUser(email);
     if (user) {
       const indexUser = this.users.indexOf(user);
       this.users.splice(indexUser, 1);
@@ -77,5 +77,16 @@ export class UsersService {
       msg: 'Usuário não existe',
       users: this.users,
     };
+  }
+
+  async filterByName(name: string) {
+    const users = await this.findAllUsers();
+
+    const usersFiltered = users.filter((user) =>
+      user.name.toLowerCase().includes(name)
+    );
+
+    this.users = usersFiltered;
+    return usersFiltered;
   }
 }

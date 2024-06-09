@@ -4,7 +4,7 @@ import { IUser, RolesUser } from '../../../models/user.model';
 import { UsersService } from '../../services/users.service';
 import { InputFormsComponent } from '../../components/input-forms/input-forms.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { GlobalEventService } from '../../services/eventEmit.service';
+import { SubmitEventService } from '../../services/submitEventEmit.service';
 import {
   inputConfirmPassword,
   inputEmail,
@@ -34,7 +34,7 @@ export class EditUserComponent {
     private router: Router,
     private route: ActivatedRoute,
     private usersService: UsersService,
-    private globalEventService: GlobalEventService,
+    private submitEventService: SubmitEventService,
     private cd: ChangeDetectorRef,
     private editUserService: EditUserService
   ) {}
@@ -59,7 +59,7 @@ export class EditUserComponent {
 
   async takeUser() {
     console.log(this.email);
-    return await this.usersService.foundUser(this.email);
+    return await this.usersService.findUser(this.email);
   }
 
   toDashboard() {
@@ -130,7 +130,7 @@ export class EditUserComponent {
     this.isSubmit = true;
 
     if (!this.edit.valid) {
-      this.globalEventService.emitEvent({ formGroup: this.edit });
+      this.submitEventService.emitEvent({ formGroup: this.edit });
       return;
     }
 

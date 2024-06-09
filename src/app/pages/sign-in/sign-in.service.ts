@@ -28,7 +28,7 @@ export class SignInService {
       return bcrypt.compareSync(password, (this.user as IUser).password);
     };
 
-    this.user = await this.usersService.foundUser(email);
+    this.user = await this.usersService.findUser(email);
 
     if (this.user == undefined) {
       return errorEmailOrPassword();

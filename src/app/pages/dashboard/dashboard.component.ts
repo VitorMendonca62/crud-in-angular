@@ -4,13 +4,15 @@ import { IUser, RolesUser } from '../../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { IPermissions } from './dashboard';
 import { Router } from '@angular/router';
+import { FilterComponent } from '../../components/filter/filter.component';
+import { definePermission } from '../../../utils/dashboard';
 
 type Actions = 'visible' | 'delete' | 'edit';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FilterComponent],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
@@ -28,26 +30,8 @@ export class DashboardComponent {
     this.router.navigate(['edito', email]);
   }
 
-  definePermission(role: RolesUser, action: Actions) {
-    const permissions: IPermissions = {
-      visible: {
-        admin: this.inUserRole === 'admin',
-        teacher: ['teacher', 'admin', 'student'].includes(this.inUserRole),
-        student: ['teacher', 'student', 'admin'].includes(this.inUserRole),
-      },
-      delete: {
-        admin: false,
-        teacher: this.inUserRole === 'admin',
-        student: ['teacher', 'admin'].includes(this.inUserRole),
-      },
-      edit: {
-        admin: false,
-        teacher: this.inUserRole === 'admin',
-        student: ['teacher', 'admin'].includes(this.inUserRole),
-      },
-    };
-
-    return permissions[action][role];
+  _definePermission(role: RolesUser, action: Actions, inUserRole: RolesUser) {
+    return definePermission(role, action, inUserRole);
   }
 
   takeLocationData() {
@@ -65,16 +49,26 @@ export class DashboardComponent {
   }
 
   async handleDeleteUser(email: string, role: RolesUser) {
-    const sla = await this.usersService.deleteUser(email, role);
-    this.users = sla.users;
-    this.cd.detectChanges();
+    const response = await this.usersService.deleteUser(email, role);
+    this.users = response.users;
+  }
+  async onUsersFiltered(users: IUser[]) {
+    this.users = users;
   }
 
   async takeAllUsers() {
-    this.users = await this.usersService.foundAllUsers();
+    this.users = await this.usersService.findAllUsers();
   }
 
-  ngOnInit(): void {
+  logoutUser() {
+    localStorage.removeItem('authorization');
+    localStorage.removeItem('expiresIn');
+    localStorage.removeItem('role');
+
+    this.router.navigate(['login']);
+  }
+
+  async ngOnInit(): Promise<void> {
     this.takeAllUsers();
     this.takeLocationData();
   }
