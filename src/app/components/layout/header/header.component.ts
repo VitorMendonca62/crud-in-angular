@@ -38,7 +38,6 @@ export class HeaderComponent {
 
   async handleFilterUser() {
     const users = await this.filterService.filterUsers();
-    this.emitEventService.emitEvent({ users: users });
   }
 
   handleLogout() {

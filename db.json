@@ -15,6 +15,14 @@
       "email": "111114@gmail.com",
       "role": "student",
       "password": "$2a$10$wowtEEEVABUTKJK7vsguheSql0y0xENt/42YIT1pL/QvA47Tg4bjG"
+    },
+    {
+      "id": "ac8211a7-3439-416d-8078-d85c76644ab2",
+      "number": "123153",
+      "name": "david",
+      "email": "sla123adawd@gmail.com",
+      "role": "student",
+      "password": "$2a$10$R1xHCMpBCnD.no5a2VF7M.o7iPhT4YVKoPGo6g48xz2ZQMfH9RWkS"
     }
   ],
   "teachers": [
@@ -25,6 +33,14 @@
       "email": "bbbbbb@bbb.com",
       "role": "teacher",
       "password": "$2a$10$PlzqiVca7Aonp7w/xprMy.7JS4Zf8LEB.TbGS/d9ETu79/bdDDpma"
+    },
+    {
+      "id": "6d225a9c-6533-498b-b4ab-519a6c42dac2",
+      "number": "142424",
+      "name": "Mainha",
+      "email": "sla1231@gmail.com",
+      "role": "teacher",
+      "password": "$2a$10$Lf5tHhqYCOb.WXOZT23t5OB7spNK5ULw.AHp7YpQOevjCHWgtLnJi"
     }
   ],
   "admins": [
@@ -35,6 +51,14 @@
       "email": "sla123@gmail.com",
       "role": "admin",
       "password": "$2a$10$.LjHa0GFPC.jzONPCJrTyeEr5SIPsC.Az5pAu12CmPtGfz1RY.WC2"
+    },
+    {
+      "id": "ae7137ea-ecf6-4813-aa28-36fb4d374c26",
+      "number": "123461",
+      "name": "teu pau",
+      "email": "sla123a@gmail.com",
+      "role": "admin",
+      "password": "$2a$10$2SiV/xz9ejSPplhtKrAmOO47035YB1ZTWv04p2aJo2/KucCDlWYqu"
     }
   ]
 }

@@ -15,3 +15,17 @@ export class EmitEventService {
     return this.eventSubject.asObservable();
   }
 }
+@Injectable({
+  providedIn: 'root',
+})
+export class FilterEmitEventService {
+  private eventSubject = new Subject<any>();
+
+  emitEvent(data: any) {
+    this.eventSubject.next(data);
+  }
+
+  get events$() {
+    return this.eventSubject.asObservable();
+  }
+}

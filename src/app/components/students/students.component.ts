@@ -5,6 +5,7 @@ import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../services/dashboard.service';
 import { EditUserComponent } from '../../pages/edit-user/edit-user.component';
+import { FilterEmitEventService } from '../../services/eventEmit.service';
 
 type Actions = 'visible' | 'delete' | 'edit';
 
@@ -19,13 +20,13 @@ export class StudentsComponent {
   roleInStorage!: RolesUser;
   email!: string;
 
-  modal: "edit-student" | "edit-teacher" = "edit-student"
-
+  modal: 'edit-student' | 'edit-teacher' = 'edit-student';
 
   constructor(
     private usersService: UsersService,
     private dashboardService: DashboardService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private filterEmitEventService: FilterEmitEventService
   ) {}
 
   takeRoleInStorage() {
@@ -33,11 +34,17 @@ export class StudentsComponent {
   }
 
   async takeStudents() {
-    return await this.usersService.findAllUsers('student');
+    return await this.usersService.findUsersInRole('student');
   }
 
   async ngOnInit() {
     this.students = await this.takeStudents();
+    this.filterEmitEventService.events$.subscribe((data) => {
+      if (data.users.students) {
+        this.students = data.users.students;
+      }
+      this.cd.detectChanges();
+    });
   }
 
   handleSort(reverse: boolean, key: KeysUser) {
@@ -57,7 +64,7 @@ export class StudentsComponent {
   }
   handleEdit(email: string) {
     this.email = email;
-    console.log(email, "oiiii")
+    console.log(email, 'oiiii');
     this.cd.detectChanges();
   }
 

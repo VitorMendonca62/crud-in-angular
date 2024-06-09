@@ -1,10 +1,20 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { KeysUser } from '../../pages/sign-up/sign-up';
 import { IUser, RolesUser } from '../../../models/user.model';
 import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../services/dashboard.service';
 import { EditUserComponent } from '../../pages/edit-user/edit-user.component';
+import { FilterService } from '../../services/filter.service';
+import {
+  EmitEventService,
+  FilterEmitEventService,
+} from '../../services/eventEmit.service';
 
 type Actions = 'visible' | 'delete' | 'edit';
 
@@ -19,25 +29,31 @@ export class TeachersComponent {
   roleInStorage!: RolesUser;
   email!: string;
 
-  modal: "edit-student" | "edit-teacher" = "edit-teacher"
+  modal: 'edit-student' | 'edit-teacher' = 'edit-teacher';
 
   constructor(
     private usersService: UsersService,
     private dashboardService: DashboardService,
-    private cd: ChangeDetectorRef
-
+    private cd: ChangeDetectorRef,
+    private filterEmitEventService: FilterEmitEventService
   ) {}
 
   takeRoleInStorage() {
     return localStorage.getItem('role') as RolesUser;
   }
 
-  async takeStudents() {
-    return await this.usersService.findAllUsers('teacher');
+  async takeTeachers() {
+    return await this.usersService.findUsersInRole('teacher');
   }
 
   async ngOnInit() {
-    this.teachers = await this.takeStudents();
+    this.teachers = await this.takeTeachers();
+    this.filterEmitEventService.events$.subscribe((data) => {
+      if (data.users.teachers) {
+        this.teachers = data.users.teachers;
+      }
+    });
+    this.cd.detectChanges();
   }
 
   handleSort(reverse: boolean, key: KeysUser) {
@@ -57,7 +73,7 @@ export class TeachersComponent {
   }
   handleEdit(email: string) {
     this.email = email;
-    this.cd.detectChanges()
+    this.cd.detectChanges();
   }
 
   async handleDeleteUser(email: string) {

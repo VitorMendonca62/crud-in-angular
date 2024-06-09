@@ -4,12 +4,17 @@ import { environment } from '../../environments/environment.development';
 import { forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IResponseWithOurRoleWithUsers } from '../pages/dashboard/dashboard';
+import { IData } from './users';
+import { FilterEmitEventService } from './eventEmit.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private filterEmitEventService: FilterEmitEventService
+  ) {}
 
   joinAllUsers(usersInRoles: IUser[][]): IUser[] {
     const users: IUser[] = [];
@@ -19,29 +24,29 @@ export class UsersService {
     return users;
   }
 
-  findAllUsers(role: RolesUser | 'all'): Promise<IUser[]> {
-    const listRoles: RolesUser[] = ['student', 'teacher', 'admin'];
-
-    if (role === 'all') {
-      const observables = listRoles.map((_role: RolesUser) => {
-        const url = `${environment.hostApiUrl}/${_role}s`;
-        return this.http.get<IUser[]>(url);
-      });
-
-      const observablesForked = forkJoin(observables);
-
-      return new Promise((resolve, reject) => {
-        observablesForked.subscribe((usersInRoles) => {
-          return resolve(this.joinAllUsers(usersInRoles));
-        });
-      });
-    }
-
+  findUsersInRole(role: RolesUser): Promise<IUser[]> {
     const url = `${environment.hostApiUrl}/${role}s`;
 
     return new Promise((resolve, reject) => {
       this.http.get<IUser[]>(url).subscribe((users) => {
         return resolve(users);
+      });
+    });
+  }
+
+  findAllUsers(): Promise<IUser[]> {
+    const listRoles: RolesUser[] = ['student', 'teacher', 'admin'];
+
+    const observables = listRoles.map((_role: RolesUser) => {
+      const url = `${environment.hostApiUrl}/${_role}s`;
+      return this.http.get<IUser[]>(url);
+    });
+
+    const observablesForked = forkJoin(observables);
+
+    return new Promise((resolve, reject) => {
+      observablesForked.subscribe((usersInRoles) => {
+        return resolve(this.joinAllUsers(usersInRoles));
       });
     });
   }
@@ -53,7 +58,7 @@ export class UsersService {
     email = email?.toLowerCase();
 
     if (users === 'all') {
-      users = await this.findAllUsers('all');
+      users = await this.findAllUsers();
     }
 
     let user: IUser | undefined;
@@ -96,12 +101,24 @@ export class UsersService {
   }
 
   async filterByName(name: string) {
-    const users = await this.findAllUsers('all');
+    const listRoles: RolesUser[] = ['student', 'teacher', 'admin'];
+    const data: IData = { students: [], admins: [], teachers: [] };
 
-    const usersFiltered = users.filter((user) =>
+    const admins = await this.findUsersInRole('admin');
+    data['admins'] = admins.filter((user) =>
       user.name.toLowerCase().includes(name)
     );
 
-    return usersFiltered;
+    const teachers = await this.findUsersInRole('teacher');
+    data['teachers'] = teachers.filter((user) =>
+      user.name.toLowerCase().includes(name)
+    );
+
+    const students = await this.findUsersInRole('student');
+    data['students'] = students.filter((user) =>
+      user.name.toLowerCase().includes(name)
+    );
+
+    return data;
   }
 }

@@ -33,8 +33,10 @@ export class InputFormsComponent {
 
   ngOnInit() {
     this.emitEventService.events$.subscribe((data) => {
-      this.formGroup = data.formGroup;
-      this.handlErrors();
+      if (data.formGroup) {
+        this.formGroup = data.formGroup;
+        this.handlErrors();
+      }
     });
   }
 
@@ -65,5 +67,4 @@ export class InputFormsComponent {
     this.message = '';
     this.cd.detectChanges();
   }
-
 }
