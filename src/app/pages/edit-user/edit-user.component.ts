@@ -33,6 +33,7 @@ import { showAlert } from '../../../utils/general';
 export class EditUserComponent {
   @Input() email!: string;
   @Input() users!: IUser[];
+  @Input() modal!: "edit-student" | "edit-teacher";
   messageAlert!: string;
 
   user!: IUser | undefined;

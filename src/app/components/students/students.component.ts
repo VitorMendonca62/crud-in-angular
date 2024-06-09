@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { KeysUser } from '../../pages/sign-up/sign-up';
 import { IUser, RolesUser } from '../../../models/user.model';
 import { UsersService } from '../../services/users.service';
@@ -17,10 +17,15 @@ type Actions = 'visible' | 'delete' | 'edit';
 export class StudentsComponent {
   students!: IUser[];
   roleInStorage!: RolesUser;
+  email!: string;
+
+  modal: "edit-student" | "edit-teacher" = "edit-student"
+
 
   constructor(
     private usersService: UsersService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private cd: ChangeDetectorRef
   ) {}
 
   takeRoleInStorage() {
@@ -45,14 +50,22 @@ export class StudentsComponent {
 
   _definePermission(action: Actions) {
     return this.dashboardService._definePermission(
-      "student",
+      'student',
       action,
       this.takeRoleInStorage()
     );
   }
-
+  handleEdit(email: string) {
+    this.email = email;
+    console.log(email, "oiiii")
+    this.cd.detectChanges();
+  }
 
   async handleDeleteUser(email: string) {
-    this.students = await this.dashboardService.handleDeleteUser(email, "student", this.students);
+    this.students = await this.dashboardService.handleDeleteUser(
+      email,
+      'student',
+      this.students
+    );
   }
 }

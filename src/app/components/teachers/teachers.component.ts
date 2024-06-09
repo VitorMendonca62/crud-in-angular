@@ -19,6 +19,7 @@ export class TeachersComponent {
   roleInStorage!: RolesUser;
   email!: string;
 
+  modal: "edit-student" | "edit-teacher" = "edit-teacher"
 
   constructor(
     private usersService: UsersService,

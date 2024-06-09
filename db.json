@@ -1,14 +1,6 @@
 {
   "students": [
     {
-      "id": "ce9ce30b-726e-453d-80fb-2c5e05awdwad",
-      "number": "111112",
-      "name": "awdawdawdawdaw",
-      "email": "111112@gmail.com",
-      "role": "student",
-      "password": "$2a$10$wowtEEEVABUTKJK7vsguheSql0y0xENt/42YIT1pL/QvA47Tg4bjG"
-    },
-    {
       "id": "ce9ce30b-726e-453d-80fb-adwdawdwad",
       "number": "111113",
       "name": "awdawdawdawdaw",
@@ -18,7 +10,7 @@
     },
     {
       "id": "ce9ce30b-726e-453d-80fb-dawdwadwad",
-      "number": "111114",
+      "number": "111116",
       "name": "awdawdawdawdaw",
       "email": "111114@gmail.com",
       "role": "student",

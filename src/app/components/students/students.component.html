@@ -71,7 +71,8 @@
             class="bi bi-pencil icon"
             *ngIf="_definePermission('edit')"
             data-bs-toggle="modal"
-            data-bs-target="#signinmodal"
+            (click)="handleEdit(student.email)"
+            data-bs-target="#edit-student"
           ></i>
 
           <i
@@ -84,3 +85,8 @@
     </tbody>
   </table>
 </div>
+<app-edit-user
+  [email]="email"
+  [users]="students"
+  [modal]="modal"
+></app-edit-user>
