@@ -1,0 +1,33 @@
+.logo-recife {
+  width: 267px;
+  height: 81px;
+  background-image: url("https://statics.recife.pe.gov.br/images/dynamics/logo_gestao_pcr_alt_horizontal.png?w=267");
+}
+
+@media (max-width: 992px) {
+  .buttons-header {
+    margin-top: 2rem;
+  }
+  .container-fluid {
+    justify-content: end;
+  }
+}
+
+@media (max-width: 770px) {
+  .logo-recife {
+    width: 81px;
+    background-image: url("https://cdn.folhape.com.br/upload/dn_arquivo/2021/03/158216672-1035005243658799-6718732964044541639-n.jpg");
+  }
+}
+@media (max-width: 540px) {
+  .nav-header {
+    flex-direction: column;
+  }
+  nav > .container-fluid {
+    display: block;
+  }
+
+  #navbarSupportedContent {
+    justify-content: normal !important;
+  }
+}

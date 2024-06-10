@@ -1,39 +1,48 @@
 <header class="mb-5">
   <nav class="navbar navbar-expand-lg navbar-light container">
     <div class="container-fluid">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="https://www2.recife.pe.gov.br/">
-          <img
-            src="https://statics.recife.pe.gov.br/images/dynamics/logo_gestao_pcr_alt_horizontal.png?w=267"
-            alt="Logo Prefeitura do Recife"
-            class="d-inline-block align-text-top"
-          />
-        </a>
-      </div>
-      <div
-        class="container-fluid collapse navbar-collapse"
-        id="navbarSupportedContent"
-      >
-        <form class="d-flex" (submit)="handleSearchUser()" [formGroup]="search">
-          <app-search></app-search>
-          <button class="btn btn-primary ms-2" type="submit">Buscar</button>
-        </form>
-      </div>
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#signupmodal"
-        *ngIf="permissionSingUp()"
+      <div class="d-flex nav-header">
+        <div>
+          <a class="navbar-brand" href="https://www2.recife.pe.gov.br/">
+            <div class="me-5 logo-recife"></div>
+
+            <!-- src="https://cdn.folhape.com.br/upload/dn_arquivo/2021/03/158216672-1035005243658799-6718732964044541639-n.jpg" -->
+          </a>
+        </div>
+        <div
+          class="collapse navbar-collapse d-flex justify-content-center align-items-center"
+          id="navbarSupportedContent"
         >
-        Cadastrar
-      </button>
-      <button class="btn btn-primary ms-2 float-right" type="button" (click)="handleLogout()">
-        Sair
-      </button>
+          <form
+            class="d-flex"
+            (submit)="handleSearchUser()"
+            [formGroup]="search"
+          >
+            <app-search></app-search>
+            <button class="btn btn-primary ms-2" type="submit">Buscar</button>
+          </form>
+        </div>
+      </div>
+      <div class="buttons-header">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#signupmodal"
+          *ngIf="permissionSingUp()"
+        >
+          Cadastrar
+        </button>
+        <button
+          class="btn btn-primary ms-2 float-right"
+          type="button"
+          (click)="handleLogout()"
+        >
+          Sair
+        </button>
+      </div>
     </div>
   </nav>
 </header>
 
 <app-signup></app-signup>
-

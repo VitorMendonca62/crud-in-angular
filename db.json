@@ -63,14 +63,6 @@
       "email": "bbbbbb@bbb.com",
       "role": "teacher",
       "password": "$2a$10$PlzqiVca7Aonp7w/xprMy.7JS4Zf8LEB.TbGS/d9ETu79/bdDDpma"
-    },
-    {
-      "id": "6d225a9c-6533-498b-b4ab-519a6c42dac2",
-      "number": "142424",
-      "name": "Mainha",
-      "email": "sla1231@gmail.com",
-      "role": "teacher",
-      "password": "$2a$10$Lf5tHhqYCOb.WXOZT23t5OB7spNK5ULw.AHp7YpQOevjCHWgtLnJi"
     }
   ],
   "admins": [

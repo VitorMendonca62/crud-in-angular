@@ -5,7 +5,10 @@ import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../services/dashboard.service';
 import { EditUserComponent } from '../layout/edit-user/edit-user.component';
-import { FilterEmitEventService, SearchEmitEventService } from '../../services/eventEmit.service';
+import {
+  FilterEmitEventService,
+  SearchEmitEventService,
+} from '../../services/eventEmit.service';
 import { FormGroup } from '@angular/forms';
 import { FilterComponent } from '../filter/filter.component';
 
@@ -16,6 +19,7 @@ type Actions = 'visible' | 'delete' | 'edit';
   standalone: true,
   imports: [CommonModule, EditUserComponent, FilterComponent],
   templateUrl: './students.component.html',
+  styleUrl: './students.component.css',
 })
 export class StudentsComponent {
   students!: IUser[];
@@ -24,13 +28,12 @@ export class StudentsComponent {
 
   modal: 'edit-student' | 'edit-teacher' = 'edit-student';
 
-
   constructor(
     private usersService: UsersService,
     private dashboardService: DashboardService,
     private cd: ChangeDetectorRef,
     private searchEmitEventService: SearchEmitEventService,
-    private filterEmitEventService: FilterEmitEventService,
+    private filterEmitEventService: FilterEmitEventService
   ) {}
 
   takeRoleInStorage() {
@@ -38,22 +41,25 @@ export class StudentsComponent {
   }
 
   async takeStudents() {
+    console.log('oi7');
     return await this.usersService.findUsersInRole('student');
   }
 
   async ngOnInit() {
     this.students = await this.takeStudents();
     this.searchEmitEventService.events$.subscribe((data) => {
+      console.log('oi8');
       if (data.users.students) {
         this.students = data.users.students;
       }
       this.cd.detectChanges();
     });
-    this.filterEmitEventService.events$.subscribe(data => {
-      if(data.students){
-        this.students = data.students
+    this.filterEmitEventService.events$.subscribe((data) => {
+      console.log('oi6');
+      if (data.students) {
+        this.students = data.students;
       }
-    })
+    });
   }
 
   handleSort(reverse: boolean, key: KeysUser) {
@@ -84,5 +90,4 @@ export class StudentsComponent {
       this.students
     );
   }
-
 }

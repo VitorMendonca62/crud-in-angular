@@ -16,6 +16,7 @@ export class SearchService {
   ) {}
 
   async searchUsers() {
+    console.log("OI")
     const appSearch = document.querySelector('app-search');
     const inputElement = appSearch?.querySelector('input');
 
@@ -32,7 +33,7 @@ export class SearchService {
       return accumulator;
     }).value as ClassFilter;
     const nameSearch = inputElement.value;
-    
+
     const usersInClass = await this.filterService.filterClass(classChecked);
 
     if (classChecked === 'all') {

@@ -17,6 +17,7 @@ import { HeaderComponent } from '../../components/layout/header/header.component
     HeaderComponent,
   ],
   templateUrl: './dashboard.component.html',
+  // styleUrl: "./dashboard.component.css"
 })
 export class DashboardComponent {
   constructor() {}
