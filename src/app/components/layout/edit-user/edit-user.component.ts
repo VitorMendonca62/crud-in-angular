@@ -73,7 +73,8 @@ export class EditUserComponent {
       this.edit = takeFormGroupEdit(
         this.email,
         this.user?.number,
-        this.user?.name
+        this.user?.name,
+        this.user.class
       );
     }
     return this.edit;
@@ -85,7 +86,7 @@ export class EditUserComponent {
     this.isSubmit = true;
 
     const userInput = this.edit.value as IUserEdit;
-    const { id, role, email, number } = this.user as IUser;
+    const { id, role, email, number, class: classUser } = this.user as IUser;
     const response = this.editUserService.editUser(
       userInput,
       role,

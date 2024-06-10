@@ -1,6 +1,6 @@
 <div
   class="modal fade"
-  id={{modal}}
+  id="{{ modal }}"
   tabindex="-1"
   aria-labelledby="signinmodallabel"
   aria-hidden="true"
@@ -38,7 +38,20 @@
             [formGroup]="edit"
             [isSubmit]="isSubmit"
           ></app-input-forms>
-
+          <div>
+            <label class="form-label" for="select-signup-class">Turma</label>
+            <select
+              class="form-select form-select-sm w-16"
+              aria-label=".form-select-sm example"
+              name="role"
+              id="select-signup-class"
+              formControlName="class"
+            >
+              <option selected value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+            </select>
+          </div>
           <button class="btn btn-primary my-3" type="submit">Editar</button>
         </form>
       </div>
@@ -46,8 +59,8 @@
   </div>
 </div>
 <div
-  class="toast align-items-center bg-primary text-white position-absolute "
-  style="top: 2rem; right: 2rem; z-index: 9999;"
+  class="toast align-items-center bg-primary text-white position-absolute"
+  style="top: 2rem; right: 2rem; z-index: 9999"
   role="alert-edit"
   aria-live="assertive"
   aria-atomic="true"
@@ -59,6 +72,6 @@
       class="btn-close me-2 m-auto btn-close-white"
       data-bs-dismiss="toast"
       aria-label="Close"
-      ></button>
+    ></button>
   </div>
 </div>

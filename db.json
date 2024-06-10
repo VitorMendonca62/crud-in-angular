@@ -1,15 +1,6 @@
 {
   "students": [
     {
-      "id": "000c58d9-cf5c-4cdf-80ff-778c1127c065",
-      "number": "000123",
-      "name": "Marcelo",
-      "email": "marcelo@gmail.com",
-      "role": "student",
-      "password": "$2a$10$erclti45zcar68UEjSP0qOJ1Ckgji7/5TcmqvUekhXerQWer/yfom",
-      "class": "A"
-    },
-    {
       "id": "b537d268-bca9-4288-8482-fa8f65005432",
       "number": "414144",
       "name": "Felipe",
@@ -35,6 +26,15 @@
       "role": "student",
       "password": "$2a$10$qb7JI4MqxFDmjRy1ryhpiOUtCTmMyi0IfHIZNBJ1dEvbJbC6wUlL.",
       "class": "B"
+    },
+    {
+      "id": "45916a6e-c935-4d04-829a-cafe65e0695f",
+      "number": "000123",
+      "name": "Marcelo",
+      "email": "marcelo@gmail.com",
+      "role": "student",
+      "password": "$2a$10$0Rq2rb2FIjJzrYUmNucRReX/O3i/.NhhyS9uoKMit1YN6VmHJ1Hq6",
+      "class": "A"
     }
   ],
   "teachers": [

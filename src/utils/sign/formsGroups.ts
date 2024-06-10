@@ -10,14 +10,8 @@ export const takeFormGroupSignUp = () =>
         Validators.maxLength(6),
         Validators.pattern('^[0-9 ]{6}$'),
       ]),
-      name: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-      ]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ]),
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
@@ -38,16 +32,14 @@ export const takeFormGroupSignIn = () =>
       Validators.required,
       Validators.minLength(8),
     ]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
 export const takeFormGroupEdit = (
   email: string,
   number: string,
-  name: string
+  name: string,
+  classUSer: 'A' | 'B' | 'C'
 ) =>
   new FormGroup({
     number: new FormControl(number, [
@@ -57,4 +49,5 @@ export const takeFormGroupEdit = (
     ]),
     name: new FormControl(name, [Validators.required, Validators.minLength(4)]),
     email: new FormControl(email, [Validators.required, Validators.email]),
+    class: new FormControl(classUSer, [Validators.required]),
   });

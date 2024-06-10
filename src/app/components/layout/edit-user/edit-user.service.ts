@@ -26,7 +26,7 @@ export class EditUserService extends SignUpService {
     numberUser: string,
     userRole: RolesUser
   ) {
-    const { email, name, number } = user;
+    const { email, name, number, class: classUser } = user;
 
     let isInDatabase = true;
     if (email !== emailUser && number !== numberUser) {
@@ -57,10 +57,11 @@ export class EditUserService extends SignUpService {
       const observable = this.http.patch<Response>(url, {
         number,
         name,
+        class: classUser,
         email: email.toLowerCase(),
       });
 
-      observable.subscribe((response) => response);
+      observable.subscribe();
 
       return {
         error: false,

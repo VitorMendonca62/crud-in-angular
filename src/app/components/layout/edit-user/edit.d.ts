@@ -8,4 +8,5 @@ export interface IUserEdit {
   name: string;
   email: string;
   number: string;
+  class: "A" | "B" | "C"
 }
