@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { SearchComponent } from '../../search/search.component';
-import { IUser, RolesUser } from '../../../../models/user.model';
+import { RolesUser } from '../../../../models/user.model';
 import { EmitEventService } from '../../../services/eventEmit.service';
 import { SearchService } from '../../../services/search.service';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';

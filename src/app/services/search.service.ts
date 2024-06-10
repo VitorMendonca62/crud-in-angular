@@ -16,7 +16,6 @@ export class SearchService {
   ) {}
 
   async searchUsers() {
-    console.log("OI")
     const appSearch = document.querySelector('app-search');
     const inputElement = appSearch?.querySelector('input');
 

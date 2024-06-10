@@ -1,8 +1,6 @@
 import {
   ChangeDetectorRef,
   Component,
-  EventEmitter,
-  Output,
 } from '@angular/core';
 import { KeysUser } from '../layout/sign-up/sign-up';
 import { IUser, RolesUser } from '../../../models/user.model';
@@ -10,9 +8,7 @@ import { UsersService } from '../../services/users.service';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../services/dashboard.service';
 import { EditUserComponent } from '../layout/edit-user/edit-user.component';
-import { SearchService } from '../../services/search.service';
 import {
-  EmitEventService,
   SearchEmitEventService,
 } from '../../services/eventEmit.service';
 

@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
-import { UsersService } from '../../services/users.service';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,5 +8,5 @@ import { CommonModule } from '@angular/common';
   templateUrl: './search.component.html',
 })
 export class SearchComponent {
-  constructor(private usersService: UsersService) {}
+  constructor() {}
 }

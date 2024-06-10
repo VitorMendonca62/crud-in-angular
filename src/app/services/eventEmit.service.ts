@@ -8,37 +8,34 @@ export class EmitEventService {
   private eventSubject = new Subject<any>();
 
   emitEvent(data: any) {
-    console.log("oi3")
     this.eventSubject.next(data);
-    }
+  }
 
-    get events$() {
-      return this.eventSubject.asObservable();
-      }
-      }
-      @Injectable({
+  get events$() {
+    return this.eventSubject.asObservable();
+  }
+}
+@Injectable({
   providedIn: 'root',
-  })
-  export class SearchEmitEventService {
-    private eventSubject = new Subject<any>();
+})
+export class SearchEmitEventService {
+  private eventSubject = new Subject<any>();
 
-    emitEvent(data: any) {
-    console.log("oi4")
+  emitEvent(data: any) {
     this.eventSubject.next(data);
-    }
+  }
 
-    get events$() {
-      return this.eventSubject.asObservable();
-      }
-      }
-      @Injectable({
+  get events$() {
+    return this.eventSubject.asObservable();
+  }
+}
+@Injectable({
   providedIn: 'root',
-  })
-  export class FilterEmitEventService {
-    private eventSubject = new Subject<any>();
+})
+export class FilterEmitEventService {
+  private eventSubject = new Subject<any>();
 
-    emitEvent(data: any) {
-      console.log("oi5")
+  emitEvent(data: any) {
     this.eventSubject.next(data);
   }
 

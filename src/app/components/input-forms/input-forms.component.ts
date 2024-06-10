@@ -4,8 +4,6 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EmitEventService } from '../../services/eventEmit.service';

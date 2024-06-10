@@ -25,7 +25,7 @@ import { takeFormGroupSignIn } from '../../../utils/sign/formsGroups';
     `
       @media (max-width: 600px) {
         #div-container {
-          background-color: white!important;
+          background-color: white !important;
         }
       }
     `,

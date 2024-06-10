@@ -5,7 +5,6 @@ import { DashboardService } from '../../services/dashboard.service';
 import { KeysUser } from '../layout/sign-up/sign-up';
 import { CommonModule } from '@angular/common';
 import {
-  EmitEventService,
   SearchEmitEventService,
 } from '../../services/eventEmit.service';
 

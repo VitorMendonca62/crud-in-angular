@@ -11,7 +11,6 @@ import { SignUpService } from './sign-up.service';
 import { ICreateUser, IInputsSingUp } from './sign-up';
 import { RolesUser } from '../../../../models/user.model';
 import { takeFormGroupSignUp } from '../../../../utils/sign/formsGroups';
-import { UsersService } from '../../../services/users.service';
 import { Router } from '@angular/router';
 import {
   inputName,
@@ -57,7 +56,6 @@ export class SignUpComponent {
     private signUpService: SignUpService,
     private router: Router,
     private cd: ChangeDetectorRef,
-    private usersService: UsersService
   ) {}
 
   public signup!: FormGroup;
@@ -71,7 +69,6 @@ export class SignUpComponent {
   }
 
   ngOnInit(): void {
-    // this.permissionsService.permissionAcessInSignUp();
     this.defineFormGroupSignUp();
     this.takeRoleInStorage();
   }

@@ -14,7 +14,6 @@ export class FilterService {
   ) {}
 
   filterClass(classUser: ClassFilter) {
-    console.log("oi2")
     return this.usersService.findUsersInRole('student').then(async (users) => {
       const appSearch = document.querySelector('app-search');
       const inputElement = appSearch?.querySelector('input');

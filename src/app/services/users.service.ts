@@ -80,7 +80,6 @@ export class UsersService {
     users: IUser[]
   ): Promise<IResponseWithOurRoleWithUsers> {
     const user = await this.findUser(email, users);
-    console.log(user);
     if (user) {
       const indexUser = users.indexOf(user);
       users.splice(indexUser, 1);

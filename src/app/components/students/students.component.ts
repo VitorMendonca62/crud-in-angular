@@ -9,7 +9,6 @@ import {
   FilterEmitEventService,
   SearchEmitEventService,
 } from '../../services/eventEmit.service';
-import { FormGroup } from '@angular/forms';
 import { FilterComponent } from '../filter/filter.component';
 
 type Actions = 'visible' | 'edit';
@@ -41,21 +40,18 @@ export class StudentsComponent {
   }
 
   async takeStudents() {
-    console.log('oi7');
     return await this.usersService.findUsersInRole('student');
   }
 
   async ngOnInit() {
     this.students = await this.takeStudents();
     this.searchEmitEventService.events$.subscribe((data) => {
-      console.log('oi8');
       if (data.users.students) {
         this.students = data.users.students;
       }
       this.cd.detectChanges();
     });
     this.filterEmitEventService.events$.subscribe((data) => {
-      console.log('oi6');
       if (data.students) {
         this.students = data.students;
       }
@@ -79,7 +75,6 @@ export class StudentsComponent {
   }
   handleEdit(email: string) {
     this.email = email;
-    console.log(email, 'oiiii');
     this.cd.detectChanges();
   }
 

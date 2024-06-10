@@ -1,20 +1,12 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IUser, RolesUser } from '../../../../models/user.model';
 import { UsersService } from '../../../services/users.service';
 import { InputFormsComponent } from '../../input-forms/input-forms.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EmitEventService } from '../../../services/eventEmit.service';
 import {
-  inputConfirmPassword,
   inputEmail,
-  inputPassword,
   inputName,
   inputNumber,
 } from '../../../../utils/sign/inputs';
@@ -33,15 +25,13 @@ import { showAlert } from '../../../../utils/general';
 export class EditUserComponent {
   @Input() email!: string;
   @Input() users!: IUser[];
-  @Input() modal!: "edit-student" | "edit-teacher";
+  @Input() modal!: 'edit-student' | 'edit-teacher';
   messageAlert!: string;
 
   user!: IUser | undefined;
   isInDatabase: boolean = false;
 
   constructor(
-    // private router: Router,
-    // private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
     private usersService: UsersService,
     private emitEventService: EmitEventService,

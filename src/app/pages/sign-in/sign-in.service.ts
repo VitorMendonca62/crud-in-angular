@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import bcrypt from 'bcryptjs';
 import { IUser } from '../../../models/user.model';
 import { ILoginUser, IResponse } from './sign-in';
@@ -27,7 +26,7 @@ export class SignInService {
       return bcrypt.compareSync(password, (this.user as IUser).password);
     };
 
-    this.user = await this.usersService.findUser(email, "all");
+    this.user = await this.usersService.findUser(email, 'all');
 
     if (this.user == undefined) {
       return errorEmailOrPassword();
