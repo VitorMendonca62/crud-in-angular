@@ -56,6 +56,41 @@ Esses são os administradores, conseguem criar, vizualizar, editar e deletar tod
 
 ### Dashboard
 #### Estudante
+![.](assets/dashboard-student.png)
+#### Professor
+![.](assets/dashboard-teacher.png)
+#### Coordenador
+![.](assets/dashboard-admin.png)
+
+### Editar
+![.](assets/edit.png)
+
+### Cadastro
+### Com professor
+![.](assets/signup-teacher.png)
+### Com coordenador
+![.](assets/signup-admin.png)
+### Validação de inputs:
+![.](assets/inputs-validation.png)
+### Validação de usuários ( também tem de email )
+![.](assets/existeUsuario.png)
+
+### Filtro
+#### Filtrando apenas a turma B
+![.](assets/filter.png)
+
+### Pesquisa
+#### Pesquisando o nome Ronaldo com filtro todos
+![.](assets/search.png)
+#### Pesquisando o nome Ronaldo com o filtro no A
+![.](assets/search-trust.png)
+
+### Login
+#### Formulário de login 
+![.](assets/login.png)
+#### Validação de inputs:
+![.](assets/login-validate.png)
+
 
 
 
