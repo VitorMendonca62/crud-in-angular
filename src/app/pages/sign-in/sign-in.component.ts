@@ -8,10 +8,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EmitEventService } from '../../services/eventEmit.service';
 import { IInputsSingIn, ILoginUser, IResponse } from './sign-in';
 import { SignInService } from './sign-in.service';
-import {
-  inputEmail,
-  inputPassword,
-  } from '../../../utils/sign/inputs';
+import { inputEmail, inputPassword } from '../../../utils/sign/inputs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { RolesUser } from '../../../models/user.model';
@@ -26,8 +23,10 @@ import { takeFormGroupSignIn } from '../../../utils/sign/formsGroups';
   templateUrl: './sign-in.component.html',
   styles: [
     `
-      form {
-        width: 30rem;
+      @media (max-width: 600px) {
+        #div-container {
+          background-color: white!important;
+        }
       }
     `,
   ],
@@ -45,7 +44,7 @@ export class SignInComponent {
     private router: Router
   ) {}
 
-  inputs: IInputsSingIn  = { inputPassword, inputEmail };
+  inputs: IInputsSingIn = { inputPassword, inputEmail };
 
   public signin!: FormGroup;
 
