@@ -1,0 +1,15 @@
+@media (max-width: 870px) {
+  .container {
+    max-width: none !important;
+    padding: 0 0 0 1rem;
+  }
+}
+@media (max-width: 660px) {
+  .container {
+    transform: translateY(-8rem);
+    }
+    .container table {
+      scale: 0.8;
+      transform: translateX(-4.75rem);
+  }
+}

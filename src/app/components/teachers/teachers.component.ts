@@ -23,6 +23,7 @@ type Actions = 'visible' | 'delete' | 'edit';
   standalone: true,
   imports: [CommonModule, EditUserComponent],
   templateUrl: './teachers.component.html',
+  styleUrl: "./teachers.component.css",
 })
 export class TeachersComponent {
   teachers!: IUser[];

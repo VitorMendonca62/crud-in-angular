@@ -4,7 +4,10 @@ import { UsersService } from '../../services/users.service';
 import { DashboardService } from '../../services/dashboard.service';
 import { KeysUser } from '../layout/sign-up/sign-up';
 import { CommonModule } from '@angular/common';
-import { EmitEventService, SearchEmitEventService } from '../../services/eventEmit.service';
+import {
+  EmitEventService,
+  SearchEmitEventService,
+} from '../../services/eventEmit.service';
 
 type Actions = 'visible' | 'delete' | 'edit';
 
@@ -13,6 +16,7 @@ type Actions = 'visible' | 'delete' | 'edit';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './admins.component.html',
+  styleUrl: "./admins.component.css"
 })
 export class AdminsComponent {
   admins!: IUser[];
@@ -47,7 +51,7 @@ export class AdminsComponent {
 
   _definePermission(action: Actions) {
     return this.dashboardService._definePermission(
-      "admin",
+      'admin',
       action,
       this.takeRoleInStorage()
     );

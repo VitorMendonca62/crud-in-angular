@@ -1,5 +1,17 @@
 @media (max-width: 870px) {
   .container {
     max-width: none !important;
+    padding: 0 0 0 1rem;
+  }
+  .container table {
+    scale: 0.8;
+    transform: translateX(-6rem);
+  }
+}
+
+@media (max-width: 660px) {
+  .container table {
+    scale: 0.61;
+    transform: translate(-15.5rem, -5rem);
   }
 }
