@@ -9,14 +9,14 @@ import {
   SearchEmitEventService,
 } from '../../services/eventEmit.service';
 
-type Actions = 'visible' | 'delete' | 'edit';
+type Actions = 'visible' | 'edit';
 
 @Component({
   selector: 'app-admins',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './admins.component.html',
-  styleUrl: "./admins.component.css"
+  styleUrl: './admins.component.css',
 })
 export class AdminsComponent {
   admins!: IUser[];

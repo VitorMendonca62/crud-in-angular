@@ -1,86 +1,68 @@
 {
   "students": [
     {
-      "id": "ce9ce30b-726e-453d-80fb-adwdawdwad",
-      "number": "111113",
-      "name": "awdawdawdawdaw",
-      "email": "111113@gmail.com",
+      "id": "000c58d9-cf5c-4cdf-80ff-778c1127c065",
+      "number": "000123",
+      "name": "Marcelo",
+      "email": "marcelo@gmail.com",
       "role": "student",
-      "password": "$2a$10$wowtEEEVABUTKJK7vsguheSql0y0xENt/42YIT1pL/QvA47Tg4bjG",
+      "password": "$2a$10$erclti45zcar68UEjSP0qOJ1Ckgji7/5TcmqvUekhXerQWer/yfom",
       "class": "A"
     },
     {
-      "id": "ce9ce30b-726e-453d-80fb-dawdwadwad",
-      "number": "111116",
-      "name": "awdawdawdawdaw",
-      "email": "111114@gmail.com",
+      "id": "b537d268-bca9-4288-8482-fa8f65005432",
+      "number": "414144",
+      "name": "Felipe",
+      "email": "felipe@gmail.com",
       "role": "student",
-      "password": "$2a$10$wowtEEEVABUTKJK7vsguheSql0y0xENt/42YIT1pL/QvA47Tg4bjG",
-      "class": "A"
+      "password": "$2a$10$IkKVnNtelpnopt6SXjRJ1OITBDVqZZtOGpWHGX61wThkHez/CoiR.",
+      "class": "B"
     },
     {
-      "id": "ac8211a7-3439-416d-8078-d85c76644ab2",
-      "number": "123153",
-      "name": "david",
-      "email": "sla123adawd@gmail.com",
+      "id": "a9547d0d-936d-44ee-8a9c-a5d66a04e1ea",
+      "number": "090909",
+      "name": "Ronaldo Fenômeno",
+      "email": "r9rei@gmail.com",
       "role": "student",
-      "password": "$2a$10$R1xHCMpBCnD.no5a2VF7M.o7iPhT4YVKoPGo6g48xz2ZQMfH9RWkS",
-      "class": "A"
+      "password": "$2a$10$k6Nrh.NvUCePZo8HaCo0p.Lnz3mQIu/hvJji5j0eOECE9K6cvDnTi",
+      "class": "C"
     },
     {
-      "id": "96105ff5-c72f-4c69-b7bb-c71a635eb786",
-      "number": "111112",
-      "name": "awdawdawdawdaw",
-      "email": "sla123dawd@gmail.com",
+      "id": "f8986658-a753-4cd6-9d69-54b3e7d80502",
+      "number": "514174",
+      "name": "César",
+      "email": "cesar@gmail.com",
       "role": "student",
-      "password": "$2a$10$cWvckU8CzyH4La/6M4qN3OnVqK2y4RANzi2cRBPXFxSFYBKtRpG8C",
-      "class": "A"
-    },
-    {
-      "id": "f8a94f54-412b-4c3a-b81f-b2702e4aca8b",
-      "number": "141412",
-      "name": "awdawdawdawdaw",
-      "email": "awdawdadwadw@gmail.com",
-      "role": "student",
-      "password": "$2a$10$bvQyL8ZfIGptKJW9eqXyNO6dclbwzMw2WVq.t/pMgUZcpKFXGewbO",
-      "class": "A"
-    },
-    {
-      "id": "34eec203-0d1c-4912-bffb-8719b204cd31",
-      "number": "111111",
-      "name": "awdawdawdawdaw",
-      "email": "sla12adawdwad3@gmail.com",
-      "role": "student",
-      "password": "$2a$10$9aSbdMMl/R116/BvCgeX6.wwKsNfeLslq7WPmnh.2cluXohM2HWGa",
+      "password": "$2a$10$qb7JI4MqxFDmjRy1ryhpiOUtCTmMyi0IfHIZNBJ1dEvbJbC6wUlL.",
       "class": "B"
     }
   ],
   "teachers": [
     {
-      "id": "66230d66-6b43-4058-a2dc-777640e39339",
-      "number": "131313",
-      "name": "KKKKKKKKKKK@2",
-      "email": "bbbbbb@bbb.com",
+      "id": "25824250-cc25-4774-b1a4-68a161c6017e",
+      "number": "000002",
+      "name": "David",
+      "email": "david@gmail.com",
       "role": "teacher",
-      "password": "$2a$10$PlzqiVca7Aonp7w/xprMy.7JS4Zf8LEB.TbGS/d9ETu79/bdDDpma"
+      "password": "$2a$10$ItSfwLS5X/.hwmDNfDJym.Y.W.zxndyS7AYYSLE537f3QA9V5C64i"
+    },
+    {
+      "id": "751359a7-687f-4dec-b1a0-6347df180fbb",
+      "number": "000003",
+      "name": "Pedro",
+      "email": "pedro@gmail.com",
+      "role": "teacher",
+      "password": "$2a$10$93sUwTfa9sOpwx8NsJT.we22Wy9EkbNNA/uuawTWS1HXbsmgRcCPe"
     }
   ],
   "admins": [
     {
-      "id": "e0271ffd-ec22-462b-b601-f78d710599c1",
-      "number": "222222",
+      "id": "f346a528-db3d-4477-9a59-0e9bc854b85b",
+      "number": "000001",
       "name": "Vitor Hugo",
-      "email": "sla123@gmail.com",
+      "email": "vitorqueiroz325@gmail.com",
       "role": "admin",
-      "password": "$2a$10$.LjHa0GFPC.jzONPCJrTyeEr5SIPsC.Az5pAu12CmPtGfz1RY.WC2"
-    },
-    {
-      "id": "ae7137ea-ecf6-4813-aa28-36fb4d374c26",
-      "number": "123461",
-      "name": "teu pau",
-      "email": "sla123a@gmail.com",
-      "role": "admin",
-      "password": "$2a$10$2SiV/xz9ejSPplhtKrAmOO47035YB1ZTWv04p2aJo2/KucCDlWYqu"
+      "password": "$2a$10$PtJoeQb/FG37DDExJE9mDOyVkHfPJ3G7f8x6I6NqFmsJ/Pdfg26Ye"
     }
   ]
 }

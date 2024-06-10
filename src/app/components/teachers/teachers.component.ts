@@ -16,14 +16,14 @@ import {
   SearchEmitEventService,
 } from '../../services/eventEmit.service';
 
-type Actions = 'visible' | 'delete' | 'edit';
+type Actions = 'visible' | 'edit';
 
 @Component({
   selector: 'app-teachers',
   standalone: true,
   imports: [CommonModule, EditUserComponent],
   templateUrl: './teachers.component.html',
-  styleUrl: "./teachers.component.css",
+  styleUrl: './teachers.component.css',
 })
 export class TeachersComponent {
   teachers!: IUser[];

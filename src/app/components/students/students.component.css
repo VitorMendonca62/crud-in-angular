@@ -12,6 +12,6 @@
 @media (max-width: 660px) {
   .container table {
     scale: 0.61;
-    transform: translate(-15.5rem, -5rem);
+    transform: translate(-14rem, -5rem);
   }
 }

@@ -5,15 +5,13 @@ export interface IResponseWithOurRoleWithUsers extends IResponseWithOutRole {
   users: IUser[];
 }
 
-interface IInPermissions{
+interface IInPermissions {
   admin: boolean;
- teacher: boolean;
+  teacher: boolean;
   student: boolean;
 }
 
 export interface IPermissions {
   visible: IInPermissions;
   edit: IInPermissions;
-  delete: IInPermissions;
-
 }

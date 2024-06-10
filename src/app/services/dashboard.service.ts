@@ -4,7 +4,7 @@ import { IUser, RolesUser } from '../../models/user.model';
 import { definePermission } from '../../utils/dashboard';
 import { UsersService } from './users.service';
 
-type Actions = 'visible' | 'delete' | 'edit';
+type Actions = 'visible' | 'edit';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,6 @@ export class DashboardService {
       return reverse ? comparison : -comparison;
     });
   }
-
 
   _definePermission(role: RolesUser, action: Actions, inUserRole: RolesUser) {
     return definePermission(role, action, inUserRole);

@@ -12,7 +12,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { FilterComponent } from '../filter/filter.component';
 
-type Actions = 'visible' | 'delete' | 'edit';
+type Actions = 'visible' | 'edit';
 
 @Component({
   selector: 'app-students',
