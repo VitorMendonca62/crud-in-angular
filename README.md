@@ -25,6 +25,15 @@ Antes de tudo, verifique se você tem todos os softwares instalados no seu compu
 ## Funcionalidades:
 O sistema possui um sistema de cadastro, pesquisa, filtragem, visualização, modificação de usuários. Além de que, possui um sistema de login como segurança do sistema.
 
+## Rotas
+O projeto possui duas rotas: /dashboard e /login;
+
+### Dashboard:
+Nessa rota você consegue visualizar todos os usuários ( dependendo da sua permissão ), você precisa estar logado para poder acessa-la.
+
+### Login:
+A rota de login você irá preencher seus dados para que posso entrar no sistema. ( Essa rota só estará acessivel se você não estiver logado ).
+
 ## Usuário criados e suas permissões:
 ### Usuários:
 Há alguns criados previamente para vocês poderem testarem livremente, são eles com seus nomes, cargos e emails:
@@ -47,7 +56,7 @@ Os estudantes conseguem apenas vizualizar outros estudantes e todos os professor
 #### Professores:
 Os professores conseguem apenas vizualizar estudantes e outros professores, além de poder criar, editar e deletar estudantes.
 
-### Coordenadores:
+#### Coordenadores:
 Esses são os administradores, conseguem criar, vizualizar, editar e deletar todos, menos os próprios coordenadores.
 
 **Obs.: Você terá que realizar o login para poder vizualizar usuários.**
