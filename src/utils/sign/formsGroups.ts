@@ -4,25 +4,25 @@ import { MustMatchPassword } from '../user';
 export const takeFormGroupSignUp = () =>
   new FormGroup(
     {
-      number: new FormControl('111111', [
+      number: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(6),
         Validators.pattern('^[0-9 ]{6}$'),
       ]),
-      name: new FormControl('awdawdawdawdaw', [
+      name: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
       ]),
-      email: new FormControl('sla123@gmail.com', [
+      email: new FormControl('', [
         Validators.required,
         Validators.email,
       ]),
-      password: new FormControl('12345678', [
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
       ]),
-      confirmPassword: new FormControl('12345678', [
+      confirmPassword: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
       ]),
@@ -34,11 +34,11 @@ export const takeFormGroupSignUp = () =>
 
 export const takeFormGroupSignIn = () =>
   new FormGroup({
-    password: new FormControl('12345678', [
+    password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
     ]),
-    email: new FormControl('sla123@gmail.com', [
+    email: new FormControl('', [
       Validators.required,
       Validators.email,
     ]),
