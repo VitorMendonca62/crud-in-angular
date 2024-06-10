@@ -16,7 +16,9 @@
 @media (max-width: 770px) {
   .logo-recife {
     width: 81px;
-    background-image: url("https://cdn.folhape.com.br/upload/dn_arquivo/2021/03/158216672-1035005243658799-6718732964044541639-n.jpg");
+    height: 81px;
+    background-size: contain;
+    background-image: url("https://farm66.staticflickr.com/65535/buddyicons/92125987@N06_r.jpg?1618332411");
   }
 }
 @media (max-width: 540px) {
