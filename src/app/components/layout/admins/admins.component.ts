@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IUser, RolesUser } from '../../../models/user.model';
-import { UsersService } from '../../services/users.service';
-import { DashboardService } from '../../services/dashboard.service';
-import { KeysUser } from '../layout/sign-up/sign-up';
+import { IUser, RolesUser } from '../../../../models/user.model';
+import { UsersService } from '../../../services/users.service';
+import { DashboardService } from '../../../services/dashboard.service';
+import { KeysUser } from '../../layout/sign-up/sign-up';
 import { CommonModule } from '@angular/common';
 import {
   SearchEmitEventService,
-} from '../../services/eventEmit.service';
+} from '../../../services/eventEmit.service';
 
 type Actions = 'visible' | 'edit';
 

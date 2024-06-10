@@ -1,15 +1,15 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { KeysUser } from '../layout/sign-up/sign-up';
-import { IUser, RolesUser } from '../../../models/user.model';
-import { UsersService } from '../../services/users.service';
+import { KeysUser } from '../../layout/sign-up/sign-up';
+import { UsersService } from '../../../services/users.service';
 import { CommonModule } from '@angular/common';
-import { DashboardService } from '../../services/dashboard.service';
-import { EditUserComponent } from '../layout/edit-user/edit-user.component';
+import { DashboardService } from '../../../services/dashboard.service';
+import { EditUserComponent } from '../../layout/edit-user/edit-user.component';
 import {
   FilterEmitEventService,
   SearchEmitEventService,
-} from '../../services/eventEmit.service';
-import { FilterComponent } from '../filter/filter.component';
+} from '../../../services/eventEmit.service';
+import { FilterComponent } from '../../filter/filter.component';
+import { RolesUser, IUser } from '../../../../models/user.model';
 
 type Actions = 'visible' | 'edit';
 
