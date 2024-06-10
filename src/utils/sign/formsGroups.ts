@@ -46,6 +46,7 @@ export const takeFormGroupEdit = (
       Validators.required,
       Validators.minLength(6),
       Validators.maxLength(6),
+      Validators.pattern('^[0-9 ]{6}$'),
     ]),
     name: new FormControl(name, [Validators.required, Validators.minLength(4)]),
     email: new FormControl(email, [Validators.required, Validators.email]),
