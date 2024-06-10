@@ -1,31 +1,63 @@
-# Seduc
+# Sistema SEDUC
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+## Pré-requesitos:
 
-## Development server
+Antes de tudo, verifique se você tem todos os softwares instalados no seu computador:
+- [NodeJS](https://nodejs.org/pt-br/download)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Passo a passo para a inicilização do projeto:
+1. Instale todas as dependências:
+```bash
+  npm install
+```
+2. Rode o servidor:
+```bash
+  npm run server
+``` 
+3. Rode o client ( Você terá que abrir um novo terminal ):
+```bash
+  npm run start
+```
+4. Pronto, o servidor e o client já estão rodando!;
+5. Para acessar o client localmente, basta entrar no seguinte link: [Site local](http://localhost:4200/)
+6. Caso queira acessar de um deploy feito no Vercel, basta entrar no seguinte: [Site remoto](https://sistema-seduc-vitor.vercel.app/)
 
-## Code scaffolding
+## Funcionalidades:
+O sistema possui um sistema de cadastro, pesquisa, filtragem, visualização, modificação de usuários. Além de que, possui um sistema de login como segurança do sistema.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usuário criados e suas permissões:
+### Usuários:
+Há alguns criados previamente para vocês poderem testarem livremente, são eles com seus nomes, cargos e emails:
+1. Marcelo - Estudante - marcelo@gmail.com
+2. Felipe - Estudante - felipe@gmail.com
+3. Ronaldo Fenômeno - Estudante - r9rei@gmail.com
+4. César - Estudante - cesar@gmail.com
+5. David - Professor - david@gmail.com
+6. Pedro - Professor - pedro@gmail.com
+7. Vitor Hugo - Professor - vitorqueiroz325@gmail.com@gmail.com
 
-## Build
+Todos eles você consegue entrar com email e senha, que é 12345678.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**Obs.: Todas as senhas são criptografadas!**
 
-## Running unit tests
+### Permissões:
+#### Estudantes:
+Os estudantes conseguem apenas vizualizar outros estudantes e todos os professores.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Professores:
+Os professores conseguem apenas vizualizar estudantes e outros professores, além de poder criar, editar e deletar estudantes.
 
-## Running end-to-end tests
+### Coordenadores:
+Esses são os administradores, conseguem criar, vizualizar, editar e deletar todos, menos os próprios coordenadores.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+**Obs.: Você terá que realizar o login para poder vizualizar usuários.**
 
-## Further help
+## Screenshots:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Dashboard
+#### Estudante
 
-### ideias:
-- O banco de dados inicial já vai estar com os professores
-- admin para criar professores e alunos
+
+
+
+
