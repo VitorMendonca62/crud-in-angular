@@ -1,6 +1,6 @@
 # Sistema SEDUC
 
-## Pré-requesitos:
+## Pré-requisitos:
 
 Antes de tudo, verifique se você tem todos os softwares instalados no seu computador:
 - [NodeJS](https://nodejs.org/pt-br/download)
